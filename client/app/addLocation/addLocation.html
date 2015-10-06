@@ -1,5 +1,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="col-md-12">
-This is the addLocation view.
+<div class="form-group">
+  <input type="text" class="form-control" ng-model="Name" name="name" value="" placeholder="namn">
+  <input type="text" class="form-control" ng-model="Latitude" name="name" value="">
+  <input type="text" class="form-control" ng-model="Longitude" name="name" value="">
+  <button type="submit" class="btn btn-warning" ng-click="addLoc()" name="button">Spara</button>
+</div>
 </div>
