@@ -1,10 +1,28 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="col-md-12">
-<div class="form-group">
-  <input type="text" class="form-control" ng-model="Name" name="name" value="" placeholder="namn">
-  <input type="text" class="form-control" ng-model="Latitude" name="name" value="">
-  <input type="text" class="form-control" ng-model="Longitude" name="name" value="">
-  <button type="submit" class="btn btn-warning" ng-click="addLoc()" name="button">Spara</button>
+<div class="col-md-6">
+	<div class="form-group">
+	  <input type="text" class="form-control" ng-model="Name" name="name" value="" placeholder="Namn">
+	  <input type="text" class="form-control" ng-model="Latitude" name="name" value="" placeholder="Latitude">
+	  <input type="text" class="form-control" ng-model="Longitude" name="name" value="" placeholder="Longitude">
+	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
+	</div>
 </div>
+<div class="col-md-6">
+	<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Longitude</th>
+					<th>Latitude</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="location in locations">
+					<td>{{ location.name }}</td>
+					<td>{{ location.longitude }}</td>
+					<td>{{ location.latitude }}</td>
+				</tr>
+			</tbody>
+	</table>
 </div>
