@@ -2,11 +2,15 @@
 
 angular.module('campforfreeApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
+    $scope.menu = [
+    {
       'title': 'Home',
       'link': '/'
+    },
+    {
+      'title': 'Add Location',
+      'link': '/addLocation'
     }];
-
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
