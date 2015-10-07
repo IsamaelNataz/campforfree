@@ -2,7 +2,9 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
+
     $scope.locations = [];
+
 
     $http.get('/api/addLocations').success(function(location) {
       $scope.locations = location;
