@@ -2,9 +2,12 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
+    <map center="-25.363882,131.044922" zoom="4" ng-repeat="marker in awesomeThings">
+      <marker position="{{marker.longitude}},{{marker.latitude}}" title="Hello World!"></marker>
+    </map>
+    <!-- <h1>'Allo, 'Allo!</h1>
     <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
   </div>
 </header>
 

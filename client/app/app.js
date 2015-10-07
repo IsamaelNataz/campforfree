@@ -5,6 +5,7 @@ angular.module('campforfreeApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'ngMap',
   'btford.socket-io'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
