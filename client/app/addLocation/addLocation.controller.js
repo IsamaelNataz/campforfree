@@ -39,9 +39,12 @@ angular.module('campforfreeApp')
 	    $scope.Name = '';
 	    $scope.Longitude = '';
 	    $scope.Latitude = '';
-      };
-   	  
+      };  
 
+    };
+
+    $scope.deleteLocation = function(location) {
+      $http.delete('/api/addLocations/' + location._id);
     };
 
   });
