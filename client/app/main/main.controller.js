@@ -4,9 +4,9 @@ angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
+    $http.get('/api/addLocations').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+      socket.syncUpdates('addLocation', $scope.awesomeThings);
     });
 
     $scope.addThing = function() {
