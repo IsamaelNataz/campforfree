@@ -18,7 +18,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="location in locations">
+				<tr ng-repeat="location in locations | orderBy: 'name' ">
 					<td>{{ location.name }}</td>
 					<td>{{ location.longitude }}</td>
 					<td>{{ location.latitude }}</td>
