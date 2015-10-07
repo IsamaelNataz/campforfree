@@ -2,11 +2,11 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+    $scope.locations = [];
 
-    $http.get('/api/addLocations').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('addLocation', $scope.awesomeThings);
+    $http.get('/api/addLocations').success(function(location) {
+      $scope.locations = location;
+      socket.syncUpdates('addLocation', $scope.locations);
     });
 
     $scope.addThing = function() {
