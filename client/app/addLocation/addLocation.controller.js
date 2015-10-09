@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, socket) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
 
     $scope.locations = [];
     $scope.positions = [];
@@ -18,11 +18,7 @@ angular.module('campforfreeApp')
       var validation = true;
       var alertMessage = "";
 
-      if ($scope.Name === undefined) {
-      	alertMessage = 'Fyll i fälten fö faen';
-      	validation = false;
-      }
-      else if($scope.Name === undefined) {
+      if($scope.Name === undefined) {
       	alertMessage = 'Fyll i namn';
       	validation = false;
       }
@@ -32,15 +28,15 @@ angular.module('campforfreeApp')
       };
 
       if (validation) {
-        var lati = $scope.positions[x].lat;
-        var longi = $scope.positions[x].lng;
+        var lati = $scope.positions[0].lat;
+        var longi = $scope.positions[0].lng;
 		    $http.post('/api/addLocations', { name: $scope.Name, longitude: lati, latitude: longi});
-	    	
         $scope.Name = '';
 		    $scope.Longitude = '';
 		    $scope.Latitude = '';
         $scope.positions = '';
-		}
+        $location.path('/');
+		  }
 
     };
 
