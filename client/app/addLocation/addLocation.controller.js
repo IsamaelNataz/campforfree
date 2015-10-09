@@ -32,13 +32,14 @@ angular.module('campforfreeApp')
       };
 
       if (validation) {
-        var lati = $scope.positions[0].lat;
-        var longi = $scope.positions[0].lng;
+        var lati = $scope.positions[x].lat;
+        var longi = $scope.positions[x].lng;
 		    $http.post('/api/addLocations', { name: $scope.Name, longitude: lati, latitude: longi});
 	    	
         $scope.Name = '';
 		    $scope.Longitude = '';
 		    $scope.Latitude = '';
+        $scope.positions = '';
 		}
 
     };
@@ -51,6 +52,8 @@ angular.module('campforfreeApp')
 	    
       var ll = event.latLng;
       $scope.positions.push({lat:ll.lat(), lng: ll.lng()});
+      console.log($scope.positions);
+      
       //console.log(ll.lat(), ll.lng());
       //$http.post('/api/addLocations', { name: '', longitude: ll.lat(), latitude: ll.lng()});
 	  }
