@@ -8,11 +8,10 @@
 
 <div class="col-md-6">
 	<div class="form-group">
-	  <input type="text" class="form-control" ng-model="Name" name="name" value="" placeholder="Namn">
-	  <input id="latitude" type="text" class="form-control" ng-model="Latitude" name="name" value="" placeholder="Latitude">
-	  <input type="text" class="form-control" ng-model="Longitude" name="name" value="" placeholder="Longitude">
-		<button type="button" name="button" ng-click="addValue()">add value</button>
-		<button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
+	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
+	  <input type="hidden" class="form-control" ng-model="Latitude" name="Latitude" placeholder="Latitude">
+	  <input type="hidden" class="form-control" ng-model="Longitude" name="Longitude" placeholder="Longitude">
+	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
 	</div>
 </div>
 <div class="col-md-6">
@@ -25,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="location in locations | orderBy: 'name' ">
+				<tr ng-repeat="location in locations">
 					<td>{{ location.name }}</td>
 					<td>{{ location.longitude }}</td>
 					<td>{{ location.latitude }}</td>
@@ -33,4 +32,11 @@
 				</tr>
 			</tbody>
 	</table>
+</div>
+
+<div class="col-md-12">
+  <map center="37.7699298, -122.4469157" zoom="2" on-click="addMarker()">
+    <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
+    <marker ng-repeat="marker in locations" position="{{marker.longitude}},{{marker.latitude}}"></marker>
+  </map>
 </div>

@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var AddLocationSchema = new Schema({
   name: String,
-  longitude: Number,
-  latitude: Number,
+  longitude: String,
+  latitude: String,
   active: Boolean
 });
 

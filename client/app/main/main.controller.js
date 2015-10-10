@@ -6,7 +6,6 @@ angular.module('campforfreeApp')
 
     $scope.locations = [];
 
-
     $http.get('/api/addLocations').success(function(location) {
       $scope.locations = location;
       socket.syncUpdates('addLocation', $scope.locations);
