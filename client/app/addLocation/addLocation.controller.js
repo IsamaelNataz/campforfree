@@ -5,6 +5,13 @@ angular.module('campforfreeApp')
 
     $scope.locations = [];
     $scope.positions = [];
+    $scope.toggleBounce = function() {
+      if (this.getAnimation() != null) {
+        this.setAnimation(null);
+      } else {
+        this.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
 
     $http.get('/api/addLocations').success(function(locations) {
       $scope.locations = locations;

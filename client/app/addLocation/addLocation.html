@@ -1,9 +1,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-6">
-	<map ng-transclude center="current-location" zoom="1" class='google-map'>
-		<marker position="{{marker.longitude}},{{marker.latitude}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>
 
-	</map>
+<div class="col-md-6">
+	<map center="37.7699298, -122.4469157" zoom="2" on-click="addMarker()">
+    <marker id="location" ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}" on-click="toggleBounce()" animation="DROP" draggable="true"></marker>
+    <marker ng-repeat="marker in locations" position="{{marker.longitude}},{{marker.latitude}}"></marker>
+  </map>
 </div>
 
 <div class="col-md-6">
@@ -34,9 +35,9 @@
 	</table>
 </div>
 
-<div class="col-md-12">
+<!-- <div class="col-md-12">
   <map center="37.7699298, -122.4469157" zoom="2" on-click="addMarker()">
     <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.longitude}},{{marker.latitude}}"></marker>
   </map>
-</div>
+</div> -->

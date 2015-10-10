@@ -1,23 +1,14 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
   <div class="container">
-
-    <map zoom="2" class='google-map'>
-      <marker position="{{marker.longitude}},{{marker.latitude}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>
-    </map>
-    <!-- <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
+    <div id="map-cont">
+      <map id="front-map" zoom="3" class='google-map'>
+        <marker position="{{marker.longitude}},{{marker.latitude}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>
+      </map>
+    </div>
+  <footer class="footer">
+    <div class="container">
+        <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
+    </div>
+  </footer>
   </div>
-</header>
-
-<div class="container">
-<!-- Main content -->
-</div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
-  </div>
-</footer>
