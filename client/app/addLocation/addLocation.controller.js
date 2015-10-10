@@ -8,10 +8,17 @@ angular.module('campforfreeApp')
       $scope.locations = locations;
       socket.syncUpdates('addLocation', $scope.locations);
     });
-    
+
+    // addValue test
+    $scope.addValue = function() {
+      alert('value');
+      // var input = getElementById('latitude');
+      // input.value = $scope.Latitude;
+    };
+
     $scope.addLoc = function() {
       var validation = true;
-      var alertMessage = "";
+      var alertMessage = '';
 
       if ($scope.Name === undefined && $scope.Longitude === undefined && $scope.Latitude === undefined) {
       	alertMessage = 'Fyll i fälten fö faen';
@@ -39,7 +46,7 @@ angular.module('campforfreeApp')
 	    $scope.Name = '';
 	    $scope.Longitude = '';
 	    $scope.Latitude = '';
-      };  
+      };
 
     };
 

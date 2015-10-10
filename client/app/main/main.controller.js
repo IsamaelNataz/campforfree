@@ -2,6 +2,7 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
+    // Mumbo-jumbo for the Geolocation
 
     $scope.locations = [];
 

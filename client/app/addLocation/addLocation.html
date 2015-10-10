@@ -1,11 +1,18 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<div class="col-md-6">
+	<map ng-transclude center="current-location" zoom="1" class='google-map'>
+		<marker position="{{marker.longitude}},{{marker.latitude}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>
+
+	</map>
+</div>
 
 <div class="col-md-6">
 	<div class="form-group">
 	  <input type="text" class="form-control" ng-model="Name" name="name" value="" placeholder="Namn">
-	  <input type="text" class="form-control" ng-model="Latitude" name="name" value="" placeholder="Latitude">
+	  <input id="latitude" type="text" class="form-control" ng-model="Latitude" name="name" value="" placeholder="Latitude">
 	  <input type="text" class="form-control" ng-model="Longitude" name="name" value="" placeholder="Longitude">
-	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
+		<button type="button" name="button" ng-click="addValue()">add value</button>
+		<button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
 	</div>
 </div>
 <div class="col-md-6">
