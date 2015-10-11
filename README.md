@@ -1,2 +1,2 @@
 # campforfree
-campforfree
+campforfree is so awesome!
