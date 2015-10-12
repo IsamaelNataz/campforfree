@@ -1,11 +1,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div id="locMap-cont" class="col-md-6">
-	<map center="current-location" zoom="8" on-click="addMarker()">
-	<!-- <map center="37.7699298, -122.4469157" zoom="2" on-click="addMarker()"> -->
-    <marker id="location" position="current-location" animation="DROP" draggable="true"></marker>
-    <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
-  </map>
+	<map center="{{map.center}}" zoom="{{map.zoom}}" on-click="addMarker()">
+	    <marker id="location" position="{{map.position}}" animation="{{map.animation}}" draggable="{{map.draggable}}" icon="{{map.icon}}"></marker>
+	    <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
+  	</map>
 </div>
 <h1>{{positions}}</h1>
 <div class="col-md-6">

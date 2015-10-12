@@ -66,5 +66,14 @@ angular.module('campforfreeApp')
       //$http.post('/api/addLocations', { name: '', longitude: ll.lat(), latitude: ll.lng()});
 	  }
 
+    $scope.map = {
+      center: "current-location",
+      zoom: 8,
+      position: "current-location",
+      animation: "DROP",
+      draggable: true,
+      icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+    }
+
 
 });
