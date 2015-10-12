@@ -4,7 +4,10 @@ angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
 
     $scope.locations = [];
-    $scope.positions = [];
+    $scope.positions = "";
+
+    document.getElementById('location').style.display = 'none';
+
     $scope.toggleBounce = function() {
       if (this.getAnimation() != null) {
         this.setAnimation(null);
@@ -36,9 +39,9 @@ angular.module('campforfreeApp')
 
       if (validation) {
 
-        var lati = $scope.positions[0].lat;
-        var longi = $scope.positions[0].lng;
-		    $http.post('/api/addLocations', { name: $scope.Name, longitude: lati, latitude: longi});
+        // var  = $scope.positions[0].lat;
+        // var longi = $scope.positions[0].lng;
+		    $http.post('/api/addLocations', { name: $scope.Name, coords: $scope.positions});
         $scope.Name = '';
 		    $scope.Longitude = '';
 		    $scope.Latitude = '';
@@ -54,11 +57,16 @@ angular.module('campforfreeApp')
 
 	  $scope.addMarker = function(event) {
 
+      $scope.positions = "";
       var ll = event.latLng;
-      $scope.positions.push({lat:ll.lat(), lng: ll.lng()});
-      console.log($scope.positions);
+      $scope.positions = ll.lat() +","+ ll.lng();
+
+
+      //ll.toggleBounce();
 
       //console.log(ll.lat(), ll.lng());
       //$http.post('/api/addLocations', { name: '', longitude: ll.lat(), latitude: ll.lng()});
 	  }
+
+
 });
