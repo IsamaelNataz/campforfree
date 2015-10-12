@@ -6,8 +6,6 @@ angular.module('campforfreeApp')
     $scope.locations = [];
     $scope.positions = "";
 
-    document.getElementById('location').style.display = 'none';
-
     $scope.toggleBounce = function() {
       if (this.getAnimation() != null) {
         this.setAnimation(null);
