@@ -5,7 +5,7 @@
 	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
     <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
-  	</map>
+  </map>
 </div>
 <h1>{{positions}}</h1>
 <div class="col-md-6">
