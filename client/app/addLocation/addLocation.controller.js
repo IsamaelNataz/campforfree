@@ -6,6 +6,13 @@ angular.module('campforfreeApp')
     $scope.locations = [];
     $scope.positions = "";
 
+    var marker = new google.maps.Marker({
+    position: latlng,
+    map: map,
+    title: 'Set lat/lon values for this property',
+    draggable: true
+});
+
     $scope.toggleBounce = function() {
       if (this.getAnimation() != null) {
         this.setAnimation(null);
@@ -57,6 +64,7 @@ angular.module('campforfreeApp')
 
       $scope.positions = "";
       var ll = event.latLng;
+      console.log($scope.positions);
       $scope.positions = ll.lat() +","+ ll.lng();
 
 

@@ -2,8 +2,9 @@
 
 <div id="locMap-cont" class="col-md-6">
 	<map center="{{map.center}}" zoom="{{map.zoom}}" on-click="addMarker()">
-	    <marker id="location" position="{{map.position}}" animation="{{map.animation}}" draggable="{{map.draggable}}" icon="{{map.icon}}"></marker>
-	    <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
+			<!-- <marker id="location" position="{{positions}}" animation="{{map.animation}}" draggable="{{map.draggable}}" icon="{{map.icon}}"></marker> -->
+			{{marker}}
+			<marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
   	</map>
 </div>
 <h1>{{positions}}</h1>

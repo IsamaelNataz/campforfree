@@ -3,29 +3,14 @@
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     // Mumbo-jumbo for the Geolocation
- //    var map;
- //
- // function initialize() {
- //     var myLatlng1 = new google.maps.LatLng(30.65914, 0.072050);
- //
- //     var mapOptions = {
- //         zoom: 2,
- //         center: myLatlng1,
- //         mapTypeId: google.maps.MapTypeId.ROADMAP
- //     };
- //     var map = new google.maps.Map(document.getElementById('map-cont'),
- //     mapOptions);
- //
- //     if (navigator.geolocation) {
- //         navigator.geolocation.getCurrentPosition(function (position) {
- //             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
- //             map.setCenter(initialLocation);
- //         });
- //     }
- // }
- // initialize();
-    $scope.locations = [];
+    var get_location = function(){
+      navigator.geolocation.getCurrentPosition(show_map);
+    }
 
+    console.log(get_location);
+
+    $scope.locations = [];
+    // console.log(navigator.geolocation.getCurrentPosition);
     $http.get('/api/addLocations').success(function(location) {
       $scope.locations = location;
       socket.syncUpdates('addLocation', $scope.locations);
