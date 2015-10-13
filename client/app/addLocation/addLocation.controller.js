@@ -4,7 +4,7 @@ angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
 
     $scope.locations = [];
-    $scope.positions = "";
+    $scope.positions = 'current-location';
 
     $http.get('/api/addLocations').success(function(locations) {
       $scope.locations = locations;
@@ -40,31 +40,25 @@ angular.module('campforfreeApp')
       	$http.delete('/api/addLocations/' + location._id);
     };
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        $scope.positions = pos.J +","+pos.M;
-    });
-
 	  $scope.addMarker = function(event) {
 
-      $scope.positions = "";
       var ll = event.latLng;
       console.log($scope.positions);
-      $scope.positions = ll.lat() +","+ ll.lng();
+      $scope.positions = ll.lat() +','+ ll.lng();
 
-	  }
+	  };
 
     $scope.map = {
       zoom: 5
-    }
+    };
 
     $scope.marker = {
       draggable: true,
-      animation: "DROP",
+      animation: 'DROP',
       options: {
         animation: google.maps.Animation.BOUNCE
       },
-      icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-    }
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    };
 
 });
