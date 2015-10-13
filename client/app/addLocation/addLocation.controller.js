@@ -4,7 +4,6 @@ angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
 
     $scope.locations = [];
-    $scope.positions = 'current-location';
 
     $http.get('/api/addLocations').success(function(locations) {
       $scope.locations = locations;
@@ -41,12 +40,16 @@ angular.module('campforfreeApp')
 
     };
 
+    navigator.geolocation.getCurrentPosition(function(position){
+      $scope.positions = position.coords.latitude + "," + position.coords.longitude; 
+    });
+
     $scope.deleteLocation = function(location) {
       	$http.delete('/api/addLocations/' + location._id);
     }
 
     $scope.map = {
-      zoom: 5
+      zoom: 1
     };
 
     $scope.marker = {
@@ -64,7 +67,5 @@ angular.module('campforfreeApp')
       $scope.positions = ll.lat() +','+ ll.lng();
 
 	  };
-
-    
 
 });
