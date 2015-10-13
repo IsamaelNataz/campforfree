@@ -46,8 +46,7 @@ angular.module('campforfreeApp')
     }
 
     $scope.map = {
-      zoom: 5,
-      center: "current-location"
+      zoom: 5
     };
 
     $scope.marker = {
