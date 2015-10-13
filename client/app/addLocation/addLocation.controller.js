@@ -6,27 +6,9 @@ angular.module('campforfreeApp')
     $scope.locations = [];
     $scope.positions = "";
 
-    var marker = new google.maps.Marker({
-    position: latlng,
-    map: map,
-    title: 'Set lat/lon values for this property',
-    draggable: true
-});
-
-    $scope.toggleBounce = function() {
-      if (this.getAnimation() != null) {
-        this.setAnimation(null);
-      } else {
-        this.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    }
-
     $http.get('/api/addLocations').success(function(locations) {
       $scope.locations = locations;
       socket.syncUpdates('addLocation', $scope.locations);
-      // angular.forEach(locations, function (val) {
-      //   $scope.positions.push({lat: val.latitude, lng: val.longitude});
-      // });
     });
 
     $scope.addLoc = function() {
@@ -44,8 +26,6 @@ angular.module('campforfreeApp')
 
       if (validation) {
 
-        // var  = $scope.positions[0].lat;
-        // var longi = $scope.positions[0].lng;
 		    $http.post('/api/addLocations', { name: $scope.Name, coords: $scope.positions});
         $scope.Name = '';
 		    $scope.Longitude = '';
@@ -60,6 +40,11 @@ angular.module('campforfreeApp')
       	$http.delete('/api/addLocations/' + location._id);
     };
 
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        $scope.positions = pos.J +","+pos.M;
+    });
+
 	  $scope.addMarker = function(event) {
 
       $scope.positions = "";
@@ -67,21 +52,19 @@ angular.module('campforfreeApp')
       console.log($scope.positions);
       $scope.positions = ll.lat() +","+ ll.lng();
 
-
-      //ll.toggleBounce();
-
-      //console.log(ll.lat(), ll.lng());
-      //$http.post('/api/addLocations', { name: '', longitude: ll.lat(), latitude: ll.lng()});
 	  }
 
     $scope.map = {
-      center: "current-location",
-      zoom: 8,
-      position: "current-location",
-      animation: "DROP",
-      draggable: true,
-      icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+      zoom: 5
     }
 
+    $scope.marker = {
+      draggable: true,
+      animation: "DROP",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      },
+      icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+    }
 
 });
