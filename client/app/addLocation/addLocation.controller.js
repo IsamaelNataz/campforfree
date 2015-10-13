@@ -15,9 +15,17 @@ angular.module('campforfreeApp')
       var validation = true;
       var alertMessage = '';
 
-      if($scope.Name === undefined) {
+      if($scope.Name === undefined && $scope.Info === undefined){
+        alertMessage = 'Fyll i fälten';
+        validation = false;
+      }
+      else if($scope.Name === undefined) {
       	alertMessage = 'Fyll i namn';
       	validation = false;
+      }
+      else if ($scope.Info === undefined){
+        alertMessage = 'Fyll i info';
+        validation = false;
       }
 
       if (alertMessage) {
@@ -25,12 +33,9 @@ angular.module('campforfreeApp')
       };
 
       if (validation) {
-
-		    $http.post('/api/addLocations', { name: $scope.Name, coords: $scope.positions});
+		    $http.post('/api/addLocations', { name: $scope.Name, info: $scope.Info, coords: $scope.positions});
         $scope.Name = '';
-		    $scope.Longitude = '';
-		    $scope.Latitude = '';
-        $scope.positions = '';
+		    $scope.Info = '';
         $location.path('/');
 		  }
 
@@ -38,18 +43,11 @@ angular.module('campforfreeApp')
 
     $scope.deleteLocation = function(location) {
       	$http.delete('/api/addLocations/' + location._id);
-    };
-
-	  $scope.addMarker = function(event) {
-
-      var ll = event.latLng;
-      console.log($scope.positions);
-      $scope.positions = ll.lat() +','+ ll.lng();
-
-	  };
+    }
 
     $scope.map = {
-      zoom: 5
+      zoom: 5,
+      center: "current-location"
     };
 
     $scope.marker = {
@@ -60,5 +58,14 @@ angular.module('campforfreeApp')
       },
       icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     };
+
+	  $scope.addMarker = function(event) {
+
+      var ll = event.latLng;
+      $scope.positions = ll.lat() +','+ ll.lng();
+
+	  };
+
+    
 
 });

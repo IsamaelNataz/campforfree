@@ -1,9 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div id="locMap-cont" class="col-md-6">
-
-	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
-    <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}"></marker>
+	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()" styles="[{stylers:[{hue:'#890000'},{visibility:'simplified'},{gamma:0.5},{weight:0.5}]},{elementType:'labels',stylers:[{visibility:'off'}]},{featureType:'water',stylers:[{color:'#890000'}]}]">
+    <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
   	</map>
 </div>
@@ -11,7 +10,7 @@
 <div class="col-md-6">
 	<div class="form-group">
 	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
-
+	  <input type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info">
 	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
 	</div>
 </div>
@@ -19,13 +18,15 @@
 	<table class="table">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Coords</th>
+					<th>Namn</th>
+					<th>Info</th>
+					<th>Koordinater</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="location in locations">
 					<td>{{ location.name }}</td>
+					<td>{{location.info}}</td>
 					<td>{{ location.coords }}</td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
 				</tr>
