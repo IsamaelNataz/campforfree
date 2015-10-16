@@ -1,13 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div id="locMap-cont" class="col-md-6">
-	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()" styles="[{stylers:[{hue:'#890000'},{visibility:'simplified'},{gamma:0.5},{weight:0.5}]},{elementType:'labels',stylers:[{visibility:'off'}]},{featureType:'water',stylers:[{color:'#890000'}]}]">
+	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
     <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
   	</map>
 </div>
-<h1>{{positions}}</h1>
 <div class="col-md-6">
+	<h1>Platser</h1>	
 	<div class="form-group">
 	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
 	  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info"></textarea>

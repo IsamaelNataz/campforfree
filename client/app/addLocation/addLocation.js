@@ -5,6 +5,7 @@ angular.module('campforfreeApp')
     $routeProvider
       .when('/addLocation', {
         templateUrl: 'app/addLocation/addLocation.html',
-        controller: 'AddLocationCtrl'
+        controller: 'AddLocationCtrl',
+        authenticate: true
       });
   });

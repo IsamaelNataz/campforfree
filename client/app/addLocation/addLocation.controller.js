@@ -49,7 +49,7 @@ angular.module('campforfreeApp')
     }
 
     $scope.map = {
-      zoom: 1
+      zoom: 4
     };
 
     $scope.marker = {
