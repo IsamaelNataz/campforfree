@@ -21,6 +21,8 @@
 					<th>Namn</th>
 					<th>Info</th>
 					<th>Koordinater</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,6 +30,7 @@
 					<td>{{ location.name }}</td>
 					<td>{{location.info}}</td>
 					<td>{{ location.coords }}</td>
+					<td><a href="/editLocation/{{location._id}}"><button class="btn btn-info">Edit</button></a></td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
 				</tr>
 			</tbody>
