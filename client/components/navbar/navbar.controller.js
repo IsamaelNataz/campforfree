@@ -6,11 +6,8 @@ angular.module('campforfreeApp')
     {
       'title': 'Home',
       'link': '/'
-    },
-    {
-      'title': 'Add Location',
-      'link': '/addLocation'
-    }];
+    }
+    ];
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
