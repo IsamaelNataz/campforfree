@@ -11,6 +11,7 @@ angular.module('campforfreeApp')
     });
 
     $scope.addLoc = function() {
+      // Validation before sending data to the server
       var validation = true;
       var alertMessage = '';
 
@@ -41,12 +42,12 @@ angular.module('campforfreeApp')
     };
 
     navigator.geolocation.getCurrentPosition(function(position){
-      $scope.positions = position.coords.latitude + "," + position.coords.longitude; 
+      $scope.positions = position.coords.latitude + ',' + position.coords.longitude;
     });
 
     $scope.deleteLocation = function(location) {
       	$http.delete('/api/addLocations/' + location._id);
-    }
+    };
 
     $scope.map = {
       zoom: 4
