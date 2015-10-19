@@ -68,4 +68,12 @@ angular.module('campforfreeApp')
 
 	  };
 
+    $scope.editLocation = function(location){
+        $http.get('/api/addLocations/'+location._id).success(function(loc) {
+        $scope.loc = loc;
+        console.log(loc);
+        socket.syncUpdates('addLocation', $scope.loc);
+    });
+    };
+
 });
