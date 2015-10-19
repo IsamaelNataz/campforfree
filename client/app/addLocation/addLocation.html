@@ -11,12 +11,17 @@
 <div class="col-md-6">
 	<h1>Platser</h1>
 	<div class="form-group">
+	<form class="form-group">
 	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
 		<input type="text" class="form-control" id="latitude" placeholder="latitude">
 		<input type="text" class="form-control" id="longitude" placeholder="longitude">
 	  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info"></textarea>
+	  <label ng-repeat="tagName in Tags" class="checkbox-inline">
+		  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
+	  </label>
+
 	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
-	</div>
+	</form>
 </div>
 <div class="col-md-6">
 	<table class="table">
@@ -34,6 +39,7 @@
 					<td>{{ location.name }}</td>
 					<td>{{location.info}}</td>
 					<td>{{ location.coords }}</td>
+					<td ng-repeat="tag in location.tags"><button class="btn">{{tag}}</button></td>
 					<td><a href="/editLocation/{{location._id}}"><button class="btn btn-info">Edit</button></a></td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
 				</tr>

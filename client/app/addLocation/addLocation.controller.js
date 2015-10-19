@@ -19,9 +19,47 @@ angular.module('campforfreeApp')
       zoomControl: false,
       scaleControl: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
+
+//     $scope.locations = [];
+//
+//     $http.get('/api/addLocations').success(function(locations) {
+//       $scope.locations = locations;
+//       socket.syncUpdates('addLocation', $scope.locations);
+//     });
+//
+//     $scope.addLoc = function() {
+//       var validation = true;
+//       var alertMessage = '';
+//
+//       if($scope.Name === undefined && $scope.Info === undefined){
+//         alertMessage = 'Fyll i fälten';
+//         validation = false;
+//       }
+//       else if($scope.Name === undefined) {
+//       	alertMessage = 'Fyll i namn';
+//       	validation = false;
+//       }
+//       else if ($scope.Info === undefined){
+//         alertMessage = 'Fyll i info';
+//         validation = false;
+//       }
+//
+//       if (alertMessage) {
+//       	alert(alertMessage);
+//       };
+//
+//       if (validation) {
+// 		    $http.post('/api/addLocations', { name: $scope.Name, info: $scope.Info, coords: $scope.positions, tags: $scope.tagselection});
+//         $scope.Name = '';
+// 		    $scope.Info = '';
+//         $location.path('/');
+// 		  }
+//
+// >>>>>>> 25c5e3860681ea3727eb08424cbacfb298041e0d
     };
 
     var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+
 
     //*** Check Geolocation compatibility
     if (navigator.geolocation) {
@@ -140,5 +178,41 @@ angular.module('campforfreeApp')
     //     socket.syncUpdates('addLocation', $scope.loc);
     // });
     // };
+    $scope.map = {
+      zoom: 4
+    };
+
+    $scope.marker = {
+      draggable: true,
+      animation: 'DROP',
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      },
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    };
+
+	  $scope.addMarker = function(event) {
+      var ll = event.latLng;
+      $scope.positions = ll.lat() +','+ ll.lng();
+	  };
+
+    $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+
+    // selected tags
+    $scope.tagselection = [];
+
+    $scope.toggleSelection = function(tagName) {
+    var id = $scope.tagselection.indexOf(tagName);
+
+      // is currently selected
+      if (id > -1) {
+        $scope.tagselection.splice(id, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.tagselection.push(tagName);
+      }
+    };
 
 });

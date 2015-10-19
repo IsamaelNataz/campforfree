@@ -7,6 +7,7 @@ var AddLocationSchema = new Schema({
   name: String,
   info: String,
   coords: String,
+  tags: [],
   active: Boolean
 });
 
