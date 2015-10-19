@@ -22,7 +22,7 @@ angular.module('campforfreeApp')
     };
 
     var map = new google.maps.Map(document.getElementById('map'),mapOptions);
-    // var infoWindow = new google.maps.InfoWindow({map: map});
+
     //*** Check Geolocation compatibility
     if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -30,32 +30,42 @@ angular.module('campforfreeApp')
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-
+      // var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
       map.setCenter(pos);
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: 'Drag Me!',
+        draggable: true,
+        animation: 'DROP',
+        options: {
+          animation: google.maps.Animation.BOUNCE
+        },
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
+
+      google.maps.event.addListener(marker, 'dragend', function(marker){
+        var latLng = marker.latLng;
+        $latitude.value = latLng.lat();
+        $longitude.value = latLng.lng();
+      });
+
+
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
   } else {
-    // Browser doesn't support Geolocation
+    // If Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
-    var marker = new google.maps.Marker({
-      position: LatLng,
-      map: map,
-      title: 'Drag Me!',
-      draggable: true
-    });
 
-    google.maps.event.addListener(marker, 'dragend', function(marker){
-      var latLng = marker.latLng;
-      $latitude.value = latLng.lat();
-      $longitude.value = latLng.lng();
-    });
+
 
   }
   initialize();
-    //
+  //*** All our earlier job stuff ***//
+
     // $scope.locations = [];
     //
     // $http.get('/api/addLocations').success(function(locations) {
