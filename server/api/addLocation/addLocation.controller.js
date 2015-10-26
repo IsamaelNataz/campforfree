@@ -34,8 +34,7 @@ exports.update = function(req, res) {
   AddLocation.findById(req.params.id, function (err, addLocation) {
     if (err) { return handleError(res, err); }
     if(!addLocation) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(addLocation, req.body);
-    updated.save(function (err) {
+    addLocation.update(req.body, function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(addLocation);
     });

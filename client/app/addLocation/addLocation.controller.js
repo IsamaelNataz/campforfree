@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth) {
+
+    var user = Auth.getCurrentUser()._id;
 
     $scope.locations = [];
 
-    $http.get('/api/addLocations').success(function(locations) {
+    $http.get('/api/addLocations/').success(function(locations) {
       $scope.locations = locations;
       socket.syncUpdates('addLocation', $scope.locations);
     });
@@ -32,10 +34,15 @@ angular.module('campforfreeApp')
       };
 
       if (validation) {
-		    $http.post('/api/addLocations', { name: $scope.Name, info: $scope.Info, coords: $scope.positions, tags: $scope.tagselection});
+		    $http.post('/api/addLocations', { 
+          name: $scope.Name, 
+          info: $scope.Info, 
+          coords: $scope.positions, 
+          tags: $scope.tagselection,
+          userid: user
+        });
         $scope.Name = '';
 		    $scope.Info = '';
-        $location.path('/');
 		  }
 
     };
@@ -66,7 +73,7 @@ angular.module('campforfreeApp')
       $scope.positions = ll.lat() +','+ ll.lng();
 	  };
 
-    $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+    $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 
     // selected tags
     $scope.tagselection = [];
