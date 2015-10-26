@@ -1,15 +1,20 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div id="locMap-cont" class="col-md-6">
-	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
+
+<div id="map" class="col-md-6">
+<!-- <div id="locMap-cont" class="col-md-6"> -->
+	<!-- <map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
     <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
-  	</map>
+  </map> -->
 </div>
 <div class="col-md-6">
 	<h1>Platser</h1>
+	<div class="form-group">
 	<form class="form-group">
 	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
+		<input type="text" class="form-control" id="latitude" placeholder="latitude">
+		<input type="text" class="form-control" id="longitude" placeholder="longitude">
 	  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info"></textarea>
 	  <label ng-repeat="tagName in Tags" class="checkbox-inline">
 		  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
