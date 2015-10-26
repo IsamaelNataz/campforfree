@@ -31,6 +31,7 @@ angular.module('campforfreeApp')
         var setMarker = function(){
             if(marker){
               marker.setPosition(pos);
+              map.setCenter(pos);
             } else {
               marker = new google.maps.Marker({
               position: pos,
@@ -50,18 +51,18 @@ angular.module('campforfreeApp')
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
           $latitude.value = pos.lat();
-          latitude = pos.lat();
+          // latitude = pos.lat();
           $longitude.value = pos.lng();
-          longitude = pos.lng();
+          // longitude = pos.lng();
           setMarker();
         });
         // Marker DRAG event :::
         google.maps.event.addListener(marker, 'dragend', function(e){
           pos = e.latLng;
           $latitude.value = pos.lat();
-          latitude = pos.lat();
+          // latitude = pos.lat();
           $longitude.value = pos.lng();
-          longitude = pos.lng();
+          // longitude = pos.lng();
           setMarker();
         });
       } // END of initialize :::
