@@ -2,6 +2,7 @@
 
 angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
+
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -104,9 +105,33 @@ angular.module('campforfreeApp')
          });
          $scope.Name = '';
  		     $scope.Info = '';
-         $location.path('/');
+         $scope.tagselection = '';
  		   }
       };
+
+      $scope.deleteLocation = function(location) {
+         $http.delete('/api/addLocations/' + location._id);
+      };
+
+      $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+
+      // selected tags
+      $scope.tagselection = [];
+
+      $scope.toggleSelection = function(tagName) {
+      var id = $scope.tagselection.indexOf(tagName);
+
+        // is currently selected
+        if (id > -1) {
+          $scope.tagselection.splice(id, 1);
+        }
+
+        // is newly selected
+        else {
+          $scope.tagselection.push(tagName);
+        }
+      };
+
       initialize(pos);
 
     });
