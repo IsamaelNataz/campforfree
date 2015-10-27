@@ -4,7 +4,7 @@
 <!-- <div id="map" class="col-md-6"> -->
 <div id="locMap-cont" class="col-md-6">
 	<map center="current-location" zoom="{{map.zoom}}" on-click="addMarker()">
-    <marker id="location" position="{{positions}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
+    <marker id="location" position="{{position}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
     <marker ng-repeat="marker in locations" position="{{marker.coords}}"></marker>
   </map>
 </div>
@@ -29,7 +29,7 @@
 				<tr>
 					<th>Namn</th>
 					<th>Info</th>
-					<th>Koordinater</th>
+					<!-- <th>Koordinater</th> -->
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -38,11 +38,12 @@
 				<tr ng-repeat="location in locations">
 					<td>{{ location.name }}</td>
 					<td>{{location.info}}</td>
-					<td>{{ location.coords }}</td>
-					<td ng-repeat="tag in location.tags"><button class="btn">{{tag}}</button></td>
+					<!-- <td>{{ location.coords }}</td> -->
+					<td ng-repeat="tag in location.tags"><div class="btn btn-danger">{{tag}}</div></td>
 					<td><a href="/editLocation/{{location._id}}"><button class="btn btn-info">Edit</button></a></td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
 				</tr>
 			</tbody>
 	</table>
+	<p class="help-block"> {{ message }} </p>
 </div>

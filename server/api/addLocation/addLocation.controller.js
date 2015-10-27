@@ -9,7 +9,11 @@ exports.index = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });
+  console.log(req.user);
 };
+
+//AddLocation.find({userid : req.user._id})
+//AddLocation.find({name : "Tjenare"})
 
 // Get a single addLocation
 exports.show = function(req, res) {

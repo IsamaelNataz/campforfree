@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth, $routeParams) {
 
     var user = Auth.getCurrentUser()._id;
-
     $scope.locations = [];
 
     $http.get('/api/addLocations/').success(function(locations) {
@@ -35,13 +34,15 @@ angular.module('campforfreeApp')
       	alert(alertMessage);
       };
     
-       if (validation) {
+      if (validation) {
         $http.post('/api/addLocations', { 
           name: $scope.Name, 
           info: $scope.Info, 
           coords: $scope.position, 
           tags: $scope.tagselection,
           userid: user
+        }).then( function() {
+          $scope.message = 'Location added.';
         });
         $scope.Name = '';
         $scope.Info = '';
@@ -54,7 +55,9 @@ angular.module('campforfreeApp')
     });
     
     $scope.deleteLocation = function(location) {
-      	$http.delete('/api/addLocations/' + location._id);
+      	$http.delete('/api/addLocations/' + location._id).then( function() {
+          $scope.message = 'Location deleted.';
+        });
     };
     
     $scope.map = {
@@ -62,7 +65,7 @@ angular.module('campforfreeApp')
     };
     
     $scope.marker = {
-      draggable: true,
+      draggable: false,
       animation: 'DROP',
       options: {
         animation: google.maps.Animation.BOUNCE
