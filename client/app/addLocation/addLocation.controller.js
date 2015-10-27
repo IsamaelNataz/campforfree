@@ -29,10 +29,13 @@ angular.module('campforfreeApp')
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
         var setMarker = function(){
+          // console.log(pos.lat + ',' + pos.lng);
             if(marker){
+              $scope.positions = pos.lat() + ',' + pos.lng();
               marker.setPosition(pos);
               map.setCenter(pos);
             } else {
+              $scope.positions = pos.lat + ',' + pos.lng;
               marker = new google.maps.Marker({
               position: pos,
               map: map,
@@ -47,27 +50,26 @@ angular.module('campforfreeApp')
           }
         };
         setMarker();
+
+        // :::
+        $scope.locations = [];
+
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
           $latitude.value = pos.lat();
-          // latitude = pos.lat();
           $longitude.value = pos.lng();
-          // longitude = pos.lng();
           setMarker();
         });
         // Marker DRAG event :::
         google.maps.event.addListener(marker, 'dragend', function(e){
           pos = e.latLng;
           $latitude.value = pos.lat();
-          // latitude = pos.lat();
           $longitude.value = pos.lng();
-          // longitude = pos.lng();
           setMarker();
         });
       } // END of initialize :::
 
-      $scope.locations = [];
 
       $http.get('/api/addLocations').success(function(locations) {
         $scope.locations = locations;
@@ -106,6 +108,14 @@ angular.module('campforfreeApp')
 
     });
   }); // END of Controller :::
+
+
+
+
+// :::::::::::::::::::::::::
+// GAMMALT BÖS HÄR UNDER :::
+// :::::::::::::::::::::::::
+
 
 // var setMarker = function(){
 //   marker = new google.maps.Marker({
