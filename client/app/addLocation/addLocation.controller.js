@@ -69,7 +69,7 @@ angular.module('campforfreeApp')
 
         $scope.locations = [];
 
-        $http.get('/api/addLocations').success(function(locations) {
+         $http.get('/api/addLocations').success(function(locations) {
           $scope.locations = locations;
           socket.syncUpdates('addLocation', $scope.locations);
           for (var i = 0; i <= $scope.locations.length-1; i++) {
@@ -86,17 +86,10 @@ angular.module('campforfreeApp')
             });
 
           };
+
         });
 
-      } // END of initialize :::
-
-      // new google.maps.Marker({
-      //       position: pos,
-      //       map: map,
-      //       title: 'Du är här!',
-      // });
-
-      $scope.addLoc = function() {
+         $scope.addLoc = function() {
         var validation = true;
         var alertMessage = '';
 
@@ -105,8 +98,8 @@ angular.module('campforfreeApp')
           validation = false;
         }
         else if($scope.Name === undefined) {
-      	   alertMessage = 'Fyll i namn';
-       	   validation = false;
+           alertMessage = 'Fyll i namn';
+           validation = false;
        }
        else if ($scope.Info === undefined){
          alertMessage = 'Fyll i info';
@@ -114,7 +107,7 @@ angular.module('campforfreeApp')
        }
 
        if (alertMessage) {
-       	alert(alertMessage);
+        alert(alertMessage);
        };
 
        if (validation) {
@@ -125,9 +118,9 @@ angular.module('campforfreeApp')
           tags: $scope.tagselection
          });
          $scope.Name = '';
- 		     $scope.Info = '';
+         $scope.Info = '';
          $scope.tagselection = '';
- 		   }
+       }
       };
 
       $scope.deleteLocation = function(location) {
@@ -152,6 +145,14 @@ angular.module('campforfreeApp')
           $scope.tagselection.push(tagName);
         }
       };
+
+      } // END of initialize :::
+
+      // new google.maps.Marker({
+      //       position: pos,
+      //       map: map,
+      //       title: 'Du är här!',
+      // });
 
       initialize(pos);
 
