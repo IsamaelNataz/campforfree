@@ -9,7 +9,11 @@ exports.index = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });
+  console.log(req.user);
 };
+
+//AddLocation.find({userid : req.user._id})
+//AddLocation.find({name : "Tjenare"})
 
 // Get a single addLocation
 exports.show = function(req, res) {
@@ -34,8 +38,7 @@ exports.update = function(req, res) {
   AddLocation.findById(req.params.id, function (err, addLocation) {
     if (err) { return handleError(res, err); }
     if(!addLocation) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(addLocation, req.body);
-    updated.save(function (err) {
+    addLocation.update(req.body, function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(addLocation);
     });
