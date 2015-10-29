@@ -2,6 +2,7 @@
 
 angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
+
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -51,9 +52,6 @@ angular.module('campforfreeApp')
         };
         setMarker();
 
-        // :::
-        $scope.locations = [];
-
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
@@ -70,6 +68,7 @@ angular.module('campforfreeApp')
         });
       } // END of initialize :::
 
+      $scope.locations = [];
 
       $http.get('/api/addLocations').success(function(locations) {
         $scope.locations = locations;
@@ -98,12 +97,41 @@ angular.module('campforfreeApp')
        };
 
        if (validation) {
-         $http.post('/api/addLocations', { name: $scope.Name, info: $scope.Info, coords: $scope.positions, tags: $scope.tagselection});
+         $http.post('/api/addLocations', { 
+          name: $scope.Name, 
+          info: $scope.Info, 
+          coords: $scope.positions, 
+          tags: $scope.tagselection
+         });
          $scope.Name = '';
  		     $scope.Info = '';
-         $location.path('/');
+         $scope.tagselection = '';
  		   }
       };
+
+      $scope.deleteLocation = function(location) {
+         $http.delete('/api/addLocations/' + location._id);
+      };
+
+      $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+
+      // selected tags
+      $scope.tagselection = [];
+
+      $scope.toggleSelection = function(tagName) {
+      var id = $scope.tagselection.indexOf(tagName);
+
+        // is currently selected
+        if (id > -1) {
+          $scope.tagselection.splice(id, 1);
+        }
+
+        // is newly selected
+        else {
+          $scope.tagselection.push(tagName);
+        }
+      };
+
       initialize(pos);
 
     });

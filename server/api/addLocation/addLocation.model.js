@@ -8,6 +8,7 @@ var AddLocationSchema = new Schema({
   info: String,
   coords: String,
   tags: [],
+  userid: String,
   active: Boolean
 });
 
