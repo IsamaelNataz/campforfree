@@ -1,8 +1,12 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<div id="map" class="col-md-6">
+</div>
 <div class="col-md-6">
 	<h1>Platser</h1>
 	<div class="form-group">
-	  <input type="text" class="form-control" ng-model="Name" name="Name" ng-value="locations.name">
+	  <input type="text" class="form-control" ng-model="Name" name="Name">
+	  <input type="hidden" class="form-control" id="latitude" placeholder="latitude">
+	  <input type="hidden" class="form-control" id="longitude" placeholder="longitude">
 	  <textarea class="form-control" ng-model="Info" name="Info"></textarea>
 	  <label ng-repeat="tagName in Tags" class="checkbox-inline">
 		  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="tagselection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
@@ -10,8 +14,5 @@
 	  <button type="submit" class="btn btn-warning form-control" ng-click="editLoc(locations)" name="button">Spara</button>
 	</div>
 </div>
-<div class="col-md-6">
-	<map center="{{position}}" zoom="{{map.zoom}}" on-click="addMarker()">
-    	<marker  position="{{position}}" animation="{{marker.animation}}" options="{{marker.options}}" draggable="{{marker.draggable}}" icon="{{marker.icon}}" events="marker.events"></marker>
-	</map>
-</div>
+
+
