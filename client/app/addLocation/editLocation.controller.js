@@ -111,15 +111,11 @@ angular.module('campforfreeApp')
          });
          $scope.Name = '';
          $scope.Info = '';
-         $scope.tagselection = '';
          $location.path("/addLocation");
        }
       };
 
       $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
-
-      // selected tags
-      $scope.tagselection = [];
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
