@@ -66,14 +66,35 @@ angular.module('campforfreeApp')
           $longitude.value = pos.lng();
           setMarker();
         });
+
+        $scope.locations = [];
+
+        $http.get('/api/addLocations').success(function(locations) {
+          $scope.locations = locations;
+          socket.syncUpdates('addLocation', $scope.locations);
+          for (var i = 0; i <= $scope.locations.length-1; i++) {
+            var coords = $scope.locations[i].coords;
+            var result = coords.split(",");
+            var latlng = {
+                lat: parseFloat(result[0]),
+                lng: parseFloat(result[1])
+            };
+            new google.maps.Marker({
+              position: latlng,
+              map: map,
+              title: $scope.locations[i].name,
+            });
+
+          };
+        });
+
       } // END of initialize :::
 
-      $scope.locations = [];
-
-      $http.get('/api/addLocations').success(function(locations) {
-        $scope.locations = locations;
-        socket.syncUpdates('addLocation', $scope.locations);
-      });
+      // new google.maps.Marker({
+      //       position: pos,
+      //       map: map,
+      //       title: 'Du är här!',
+      // });
 
       $scope.addLoc = function() {
         var validation = true;
