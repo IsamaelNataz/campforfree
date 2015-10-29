@@ -6,10 +6,6 @@ angular.module('campforfreeApp')
     {
       'title': 'Home',
       'link': '/'
-    },
-    {
-      'title': 'Add Location',
-      'link': '/addLocation'
     }
     ];
     $scope.isCollapsed = true;
