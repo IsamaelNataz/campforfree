@@ -31,6 +31,8 @@ angular.module('campforfreeApp')
 
         var setMarker = function(){
           // console.log(pos.lat + ',' + pos.lng);
+          var theMapp = document.getElementById('map');
+          theMapp.innerHTML = '<marker position="{{marker.coords}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>'
             if(marker){
               $scope.positions = pos.lat() + ',' + pos.lng();
               marker.setPosition(pos);
@@ -97,10 +99,10 @@ angular.module('campforfreeApp')
        };
 
        if (validation) {
-         $http.post('/api/addLocations', { 
-          name: $scope.Name, 
-          info: $scope.Info, 
-          coords: $scope.positions, 
+         $http.post('/api/addLocations', {
+          name: $scope.Name,
+          info: $scope.Info,
+          coords: $scope.positions,
           tags: $scope.tagselection
          });
          $scope.Name = '';
