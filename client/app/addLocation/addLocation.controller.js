@@ -31,8 +31,6 @@ angular.module('campforfreeApp')
 
         var setMarker = function(){
           // console.log(pos.lat + ',' + pos.lng);
-          var theMapp = document.getElementById('map');
-          theMapp.innerHTML = '<marker position="{{marker.coords}}" title="{{marker.name}}" ng-repeat="marker in locations"></marker>'
             if(marker){
               $scope.positions = pos.lat() + ',' + pos.lng();
               marker.setPosition(pos);
@@ -53,6 +51,26 @@ angular.module('campforfreeApp')
           }
         };
         setMarker();
+        var loadMarkers = function(){
+          $http.get('/api/addLocations').success(function(locations) {
+            $scope.locations = locations;
+            socket.syncUpdates('addLocation', $scope.locations);
+            for (var i = 0; i <= $scope.locations.length-1; i++) {
+              var coords = $scope.locations[i].coords;
+              var result = coords.split(",");
+              var latlng = {
+                lat: parseFloat(result[0]),
+                lng: parseFloat(result[1])
+              };
+              new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: $scope.locations[i].name,
+              });
+            }
+          });
+        };
+        loadMarkers();
 
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
@@ -71,25 +89,7 @@ angular.module('campforfreeApp')
 
         $scope.locations = [];
 
-         $http.get('/api/addLocations').success(function(locations) {
-          $scope.locations = locations;
-          socket.syncUpdates('addLocation', $scope.locations);
-          for (var i = 0; i <= $scope.locations.length-1; i++) {
-            var coords = $scope.locations[i].coords;
-            var result = coords.split(",");
-            var latlng = {
-                lat: parseFloat(result[0]),
-                lng: parseFloat(result[1])
-            };
-            new google.maps.Marker({
-              position: latlng,
-              map: map,
-              title: $scope.locations[i].name,
-            });
 
-          };
-
-        });
 
          $scope.addLoc = function() {
         var validation = true;
@@ -122,6 +122,7 @@ angular.module('campforfreeApp')
          $scope.Name = '';
          $scope.Info = '';
          $scope.tagselection = '';
+         loadMarkers();
        }
       };
 
