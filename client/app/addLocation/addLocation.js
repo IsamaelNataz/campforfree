@@ -3,7 +3,7 @@
 angular.module('campforfreeApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/addLocation/Myplaces', {
+      .when('/minaplatser', {
         templateUrl: 'app/addLocation/addLocation.html',
         controller: 'AddLocationCtrl',
         authenticate: true
