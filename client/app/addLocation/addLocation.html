@@ -9,17 +9,19 @@
 <div class="col-md-6">
 	<h1>Lägg till ny plats</h1>
 	<div class="form-group">
-	<form class="form-group">
-	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn">
-		<input type="hidden" class="form-control" id="latitude" placeholder="latitude">
-		<input type="hidden" class="form-control" id="longitude" placeholder="longitude">
-
-	  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info"></textarea>
+	<form class="form-group" name="form" ng-submit="addLoc(form)">
+	  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn" required/>
+	  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info" required></textarea>
+	  <input type="hidden" class="form-control" id="latitude" placeholder="latitude">
+	  <input type="hidden" class="form-control" id="longitude" placeholder="longitude">
 	  <label ng-repeat="tagName in Tags" class="checkbox-inline">
 		  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
 	  </label>
+	  <!-- <label ng-repeat="tagName in Tags">
+	  	<input type="checkbox" ng-model="tag" ng-change="changeTag($index)">{{tagName}}
+	  </label> -->
 
-	  <button type="submit" class="btn btn-warning form-control" ng-click="addLoc()" name="button">Spara</button>
+	  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
 	</form>
 	<hr>
 </div>
@@ -30,7 +32,7 @@
 				<tr>
 					<th>Namn</th>
 					<th>Info</th>
-					<!-- <th>Koordinater</th> -->
+					<th>Userid</th>
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -39,7 +41,7 @@
 				<tr ng-repeat="location in locations">
 					<td>{{ location.name }}</td>
 					<td>{{location.info}}</td>
-					<!-- <td>{{ location.coords }}</td> -->
+					<td>{{ location.userid }}</td>
 					<td ng-repeat="tag in location.tags"><div class="btn btn-danger">{{tag}}</div></td>
 					<td><a href="/editLocation/{{location._id}}"><button class="btn btn-info">Edit</button></a></td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>

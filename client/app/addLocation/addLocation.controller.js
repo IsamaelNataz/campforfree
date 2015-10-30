@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, $location, socket) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
+
+      var user = Auth.getCurrentUser()._id;
+
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -51,6 +54,7 @@ angular.module('campforfreeApp')
           }
         };
         setMarker();
+
         var loadMarkers = function(){
           $http.get('/api/addLocations').success(function(locations) {
             $scope.locations = locations;
@@ -87,54 +91,42 @@ angular.module('campforfreeApp')
           setMarker();
         });
 
-        $scope.locations = [];
-
-
-
-         $scope.addLoc = function() {
-        var validation = true;
-        var alertMessage = '';
-
-
-        if($scope.Name === undefined && $scope.Info === undefined){
-          alertMessage = 'Fyll i fälten';
-          validation = false;
-        }
-        else if($scope.Name === undefined) {
-           alertMessage = 'Fyll i namn';
-           validation = false;
-       }
-       else if ($scope.Info === undefined){
-         alertMessage = 'Fyll i info';
-         validation = false;
-       }
-
-       if (alertMessage) {
-        alert(alertMessage);
-       }
-
-       if (validation) {
+      $scope.addLoc = function(form) {
+       if (form.$valid) {
          $http.post('/api/addLocations', {
           name: $scope.Name,
           info: $scope.Info,
           coords: $scope.positions,
+          userid: user,
           tags: $scope.tagselection
          });
          $scope.Name = '';
          $scope.Info = '';
-         $scope.tagselection = '';
+         $scope.tagselection = [];
          loadMarkers();
        }
       };
 
       $scope.deleteLocation = function(location) {
          $http.delete('/api/addLocations/' + location._id);
+         loadMarkers();
       };
 
-      $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+      $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 
       // selected tags
       $scope.tagselection = [];
+
+      // $scope.changeTag = function(index){
+      //   var kaj = $scope.Tags[index];
+      //   if($scope.tagselection.indexOf(kaj) == -1){
+      //     $scope.tagselection.push(kaj);
+      //   } else {
+      //     var pos = $scope.tagselection.indexOf(kaj);
+      //     $scope.tagselection.splice(pos, 1);
+      //   } 
+      //   return $scope.tagselection;
+      // };
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
@@ -151,12 +143,6 @@ angular.module('campforfreeApp')
       };
 
       } // END of initialize :::
-
-      // new google.maps.Marker({
-      //       position: pos,
-      //       map: map,
-      //       title: 'Du är här!',
-      // });
 
       initialize(pos);
 

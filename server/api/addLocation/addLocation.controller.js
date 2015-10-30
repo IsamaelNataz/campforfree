@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var AddLocation = require('./addLocation.model');
+var passport = require('passport');
 
 // Get list of addLocations
 exports.index = function(req, res) {
@@ -9,7 +10,6 @@ exports.index = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });
-  console.log(req.user);
 };
 
 //AddLocation.find({userid : req.user._id})
