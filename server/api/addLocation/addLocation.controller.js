@@ -4,15 +4,22 @@ var _ = require('lodash');
 var AddLocation = require('./addLocation.model');
 
 // Get list of addLocations
+
 exports.index = function(req, res) {
-  AddLocation.find({userid : req.user._id}, function (err, addLocations) {
+  AddLocation.find(function (err, addLocations) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });
 };
 
-//AddLocation.find({userid : req.user._id})
-//AddLocation.find({name : "Tjenare"})
+//Bara användarens platser
+exports.myplaces = function(req, res) {
+  console.log(req.user)
+  AddLocation.find({userid : req.user.name}, function (err, addLocations) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(addLocations);
+  });
+};
 
 // Get a single addLocation
 exports.show = function(req, res) {

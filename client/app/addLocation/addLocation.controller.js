@@ -5,7 +5,7 @@ angular.module('campforfreeApp')
 
     navigator.geolocation.getCurrentPosition(function(position) {
 
-      var user = Auth.getCurrentUser()._id;
+      var user = Auth.getCurrentUser().name;
 
       var pos = {
         lat: position.coords.latitude,
@@ -56,7 +56,7 @@ angular.module('campforfreeApp')
         setMarker();
 
         var loadMarkers = function(){
-          $http.get('/api/addLocations').success(function(locations) {
+          $http.get('/api/addLocations/Myplaces').success(function(locations) {
             $scope.locations = locations;
             socket.syncUpdates('addLocation', $scope.locations);
             for (var i = 0; i <= $scope.locations.length-1; i++) {
