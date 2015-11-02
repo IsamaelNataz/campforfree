@@ -1,5 +1,4 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
   <div class="container">
     <div id="map-cont">
       <map id="front-map" center="current-location" zoom="5" class='google-map'>
@@ -7,6 +6,11 @@
       </map>
     </div>
   <footer class="footer">
+    <div class="container">
+      <p>{{ showlocation.name }}</p>
+      <p>{{ showlocation.info }}</p>
+      <button class="btn btn-warning" ng-repeat="tag in showlocation.tags">{{ tag }}</button>
+    </div>
     <div class="container">
         <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
     </div>

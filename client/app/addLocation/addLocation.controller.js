@@ -35,11 +35,11 @@ angular.module('campforfreeApp')
         var setMarker = function(){
           // console.log(pos.lat + ',' + pos.lng);
             if(marker){
-              $scope.positions = pos.lat() + ',' + pos.lng();
+              $scope.positions = pos.lat().toFixed(3) + ',' + pos.lng().toFixed(3);
               marker.setPosition(pos);
               map.setCenter(pos);
             } else {
-              $scope.positions = pos.lat + ',' + pos.lng;
+              $scope.positions = pos.lat.toFixed(3) + ',' + pos.lng.toFixed(3);
               marker = new google.maps.Marker({
               position: pos,
               map: map,

@@ -14,8 +14,14 @@ exports.index = function(req, res) {
 
 //Bara användarens platser
 exports.myplaces = function(req, res) {
-  console.log(req.user)
   AddLocation.find({userid : req.user.name}, function (err, addLocations) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(addLocations);
+  });
+};
+
+exports.showlocation = function(req, res) {
+  AddLocation.find({coords : req.params.id}, function (err, addLocations) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });

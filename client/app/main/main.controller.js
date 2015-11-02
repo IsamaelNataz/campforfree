@@ -26,6 +26,10 @@ angular.module('campforfreeApp')
     });
 
     $scope.showLocation = function(locations){
-        console.log(locations);
+        var ll = locations.latLng;
+        var latlng = ll.lat().toFixed(3) +','+ ll.lng().toFixed(3);
+        $http.get('/api/addLocations/showLocation/'+latlng).success(function(showlocation) {
+        $scope.showlocation = showlocation[0];
+      });
     };
   });
