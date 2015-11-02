@@ -5,7 +5,9 @@ angular.module('campforfreeApp')
 
     navigator.geolocation.getCurrentPosition(function(position) {
 
+      //Get the name from the user that's logged-in
       var user = Auth.getCurrentUser().name;
+      var dbname = "";
 
       var pos = {
         lat: position.coords.latitude,
@@ -18,7 +20,8 @@ angular.module('campforfreeApp')
         var latitude = pos.lat;
         var longitude = pos.lng;
         var zoom = 7;
-        var marker;
+        var newmarker;
+        var markers;
 
         var LatLng = new google.maps.LatLng(latitude, longitude);
         var mapOptions = {
@@ -26,7 +29,6 @@ angular.module('campforfreeApp')
           minZoom: 2,
           center: LatLng,
           panControl: false,
-          zoomControl: false,
           scaleControl: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -34,16 +36,15 @@ angular.module('campforfreeApp')
 
         var setMarker = function(){
           // console.log(pos.lat + ',' + pos.lng);
-            if(marker){
-              $scope.positions = pos.lat().toFixed(3) + ',' + pos.lng().toFixed(3);
-              marker.setPosition(pos);
+            if(newmarker){
+              $scope.position = pos.lat() + ',' + pos.lng();
+              newmarker.setPosition(pos);
               map.setCenter(pos);
             } else {
-              $scope.positions = pos.lat.toFixed(3) + ',' + pos.lng.toFixed(3);
-              marker = new google.maps.Marker({
+              $scope.position = pos.lat + ',' + pos.lng;
+              newmarker = new google.maps.Marker({
               position: pos,
               map: map,
-              title: 'Du är här!',
               draggable: true,
               animation: 'DROP',
               options: {
@@ -66,12 +67,15 @@ angular.module('campforfreeApp')
                 lat: parseFloat(result[0]),
                 lng: parseFloat(result[1])
               };
-              new google.maps.Marker({
+              markers = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: $scope.locations[i].name,
+                title: $scope.locations[i].name
               });
             }
+            // google.maps.event.addListener(markers, 'click', function(){
+            //   console.log(this.title);
+            // });
           });
         };
         loadMarkers();
@@ -84,7 +88,7 @@ angular.module('campforfreeApp')
           setMarker();
         });
         // Marker DRAG event :::
-        google.maps.event.addListener(marker, 'dragend', function(e){
+        google.maps.event.addListener(newmarker, 'dragend', function(e){
           pos = e.latLng;
           $latitude.value = pos.lat();
           $longitude.value = pos.lng();
@@ -92,35 +96,43 @@ angular.module('campforfreeApp')
         });
 
       $scope.addLoc = function(form) {
+        // var validation = false;
+        // var kojk = $http.get('/api/addLocations/validate/'+$scope.Name).success(function(locations) {
+        // });
+        // console.log(kojk.$$state.pending);
+        
        if (form.$valid) {
          $http.post('/api/addLocations', {
           name: $scope.Name,
           info: $scope.Info,
-          coords: $scope.positions,
+          coords: $scope.position,
           userid: user,
           tags: $scope.tagselection
          }).then(function(){
-         $scope.Name = '';
-         $scope.Info = '';
-         var tags = document.getElementsByClassName('tags');
-         for (var i = 0; i <= tags.length - 1; i++) {
-           tags[i].checked = false;
-         };
-         for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
-           $scope.toggleSelection($scope.tagselection[i]);
-         };
-         // $scope.changeTag($scope.tagselection);
-         // $scope.tagselection = [];
-         loadMarkers();
+           $scope.Name = '';
+           $scope.Info = '';
+           var tags = document.getElementsByClassName('tags');
+           for (var i = 0; i <= tags.length - 1; i++) {
+             tags[i].checked = false;
+           };
+           for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+             $scope.toggleSelection($scope.tagselection[i]);
+           };
+           loadMarkers();
           });
        }
       };
 
       $scope.deleteLocation = function(location) {
-         $http.delete('/api/addLocations/' + location._id).then(function(){
-           loadMarkers();
-         });
+       $http.delete('/api/addLocations/' + location._id).then(function(){
+        loadMarkers();
+       });
       };
+
+      $scope.$on('$destroy', function () {
+        socket.unsyncUpdates('addLocation');
+      });
+
       $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 
       // selected tags

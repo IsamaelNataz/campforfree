@@ -21,7 +21,14 @@ exports.myplaces = function(req, res) {
 };
 
 exports.showlocation = function(req, res) {
-  AddLocation.find({coords : req.params.id}, function (err, addLocations) {
+  AddLocation.find({name : req.params.id}, function (err, addLocations) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(addLocations);
+  });
+};
+
+exports.validate = function(req, res) {
+  AddLocation.find({name : req.params.id}, function (err, addLocations) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);
   });

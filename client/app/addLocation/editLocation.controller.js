@@ -35,7 +35,6 @@ angular.module('campforfreeApp')
           minZoom: 2,
           center: LatLng,
           panControl: false,
-          zoomControl: false,
           scaleControl: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
