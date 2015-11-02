@@ -24,4 +24,8 @@ angular.module('campforfreeApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $scope.showLocation = function(locations){
+        console.log(locations);
+    };
   });

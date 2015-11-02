@@ -80,7 +80,6 @@ angular.module('campforfreeApp')
         });
 
         $scope.editLoc = function(location) {
-          console.log(location);
         var validation = true;
         var alertMessage = '';
 
