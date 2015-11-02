@@ -99,34 +99,32 @@ angular.module('campforfreeApp')
           coords: $scope.positions,
           userid: user,
           tags: $scope.tagselection
-         });
+         }).then(function(){
          $scope.Name = '';
          $scope.Info = '';
-         $scope.tagselection = [];
+         var tags = document.getElementsByClassName('tags');
+         for (var i = 0; i <= tags.length - 1; i++) {
+           tags[i].checked = false;
+         };
+         for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+           $scope.toggleSelection($scope.tagselection[i]);
+         };
+         // $scope.changeTag($scope.tagselection);
+         // $scope.tagselection = [];
          loadMarkers();
+          });
        }
       };
 
       $scope.deleteLocation = function(location) {
-         $http.delete('/api/addLocations/' + location._id);
-         loadMarkers();
+         $http.delete('/api/addLocations/' + location._id).then(function(){
+           loadMarkers();
+         });
       };
-
       $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 
       // selected tags
       $scope.tagselection = [];
-
-      // $scope.changeTag = function(index){
-      //   var kaj = $scope.Tags[index];
-      //   if($scope.tagselection.indexOf(kaj) == -1){
-      //     $scope.tagselection.push(kaj);
-      //   } else {
-      //     var pos = $scope.tagselection.indexOf(kaj);
-      //     $scope.tagselection.splice(pos, 1);
-      //   } 
-      //   return $scope.tagselection;
-      // };
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
