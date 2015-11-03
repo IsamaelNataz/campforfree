@@ -9,6 +9,8 @@ angular.module('campforfreeApp')
 
     function initialize(pos) {
       var marker;
+      var infowindow; 
+      var content;
       var zoom = 7;
       var latitude = pos.lat;
       var longitude = pos.lng;
@@ -36,13 +38,46 @@ angular.module('campforfreeApp')
           marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: $scope.locations[i].name
+            title: $scope.locations[i].name,
+            info: $scope.locations[i].info,
+            tags: $scope.locations[i].tags
           });
           
           google.maps.event.addListener(marker, 'click', function(){
-            $http.get('/api/addLocations/showLocation/'+this.title).success(function(showlocation) {
-            $scope.showlocation = showlocation[0];
+            var tags = "";
+            var content;
+            // $http.get('/api/addLocations/showLocation/'+this.title).success(function(showlocation) {
+            // $scope.showlocation = showlocation[0];
+            //});
+
+            console.log(this.tags);
+
+            if(typeof this.tags !== 'undefined' && this.tags.length > 0){
+
+              for (var i = 0; i <= this.tags.length-1; i++) {
+                  tags += '<button class="btn">'+this.tags[i]+'</button> ';
+                  
+                  console.log(tags);
+                  
+                  content = '<div class="infotitle"><div class="iw_title">Namn: '+this.title+'</div><div class="iw_content">Info: '+this.info+'</div>';
+                  content += tags;
+              } 
+            
+            } else {
+              content = '<div class="iw_container">' +
+                          '<div class="iw_title">Namn: '+this.title+'</div>' +
+                          '<div class="iw_content">Info: '+this.info+'</div>'+
+                          '</div>';
+            }
+            
+            infowindow = new google.maps.InfoWindow({
+              content: content
             });
+            infowindow.open(map, this)
+          });
+
+          google.maps.event.addListener(map, 'click', function() {
+            infowindow.close();
           });
         }
       });

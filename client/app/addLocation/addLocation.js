@@ -3,14 +3,18 @@
 angular.module('campforfreeApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/minaplatser', {
+      .when('/laggtillplats', {
         templateUrl: 'app/addLocation/addLocation.html',
         controller: 'AddLocationCtrl',
         authenticate: true
       })
-      .when('/editLocation/:id', {
+      .when('/redigeraplats/:id', {
         templateUrl: 'app/addLocation/editLocation.html',
         controller: 'EditLocationCtrl',
         authenticate: true
-      });
+      })
+      .when('/minaplatser', {
+        templateUrl: 'app/addLocation/myLocations.html',
+        controller: 'MyLocationCtrl',
+      })
   });

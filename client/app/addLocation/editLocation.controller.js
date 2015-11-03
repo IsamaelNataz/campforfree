@@ -113,7 +113,7 @@ angular.module('campforfreeApp')
        }
       };
 
-      $scope.Tags = ['Badplats', 'Eldplats', 'Gloryhole'];
+      $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);

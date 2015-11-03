@@ -73,9 +73,6 @@ angular.module('campforfreeApp')
                 title: $scope.locations[i].name
               });
             }
-            // google.maps.event.addListener(markers, 'click', function(){
-            //   console.log(this.title);
-            // });
           });
         };
         loadMarkers();
@@ -119,6 +116,7 @@ angular.module('campforfreeApp')
              $scope.toggleSelection($scope.tagselection[i]);
            };
            loadMarkers();
+           $scope.message = "Platsen tillagd";
           });
        }
       };

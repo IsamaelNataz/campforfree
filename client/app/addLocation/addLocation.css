@@ -5,3 +5,12 @@
 #map {
 	height: 50vh;
 }
+
+.col-md-6.ng-scope{
+	background: #f8f8f8;
+	z-index: 12;
+}
+
+button .btn{
+    outline: none;
+}
