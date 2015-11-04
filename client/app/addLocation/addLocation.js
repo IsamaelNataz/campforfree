@@ -16,5 +16,6 @@ angular.module('campforfreeApp')
       .when('/minaplatser', {
         templateUrl: 'app/addLocation/myLocations.html',
         controller: 'MyLocationCtrl',
+        authenticate: true
       })
   });

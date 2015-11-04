@@ -96,7 +96,6 @@ angular.module('campforfreeApp')
         // var validation = false;
         // var kojk = $http.get('/api/addLocations/validate/'+$scope.Name).success(function(locations) {
         // });
-        // console.log(kojk.$$state.pending);
         
        if (form.$valid) {
          $http.post('/api/addLocations', {

@@ -40,7 +40,6 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!addLocation) { return res.status(404).send('Not Found'); }
     return res.json(addLocation);
-    console.log(req.params.id);
   });
 };
 
