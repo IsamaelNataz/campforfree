@@ -1,0 +1,31 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+
+<!-- The Map Container -->
+<div id="map" class="col-md-6">
+</div>
+<div class="col-md-6">
+	<table class="table">
+			<thead>
+				<h1>Mina platser</h1>
+				<tr>
+					<th>Namn</th>
+					<th>Info</th>
+					<th>Userid</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="location in locations">
+					<td>{{ location.name }}</td>
+					<td>{{ location.info }}</td>
+					<td>{{ location.userid }}</td>
+					<td ng-repeat="tag in location.tags"><div class="btn btn-danger">{{ tag }}</div></td>
+					<td><a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera plats</button></a></td>
+					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
+				</tr>
+			</tbody>
+	</table>
+	<p class="help-block"> {{ message }} </p>
+</div>
