@@ -28,11 +28,9 @@ angular.module('campforfreeApp')
         $scope.locations = locations;
         socket.syncUpdates('addLocation', $scope.locations);
         for (var i = 0; i <= $scope.locations.length-1; i++) {
-          var coords = $scope.locations[i].coords;
-          var result = coords.split(",");
           var latlng = {
-            lat: parseFloat(result[0]),
-            lng: parseFloat(result[1])
+            lat: parseFloat($scope.locations[i].latitude),
+            lng: parseFloat($scope.locations[i].longitude)
           };
           marker = new google.maps.Marker({
             position: latlng,

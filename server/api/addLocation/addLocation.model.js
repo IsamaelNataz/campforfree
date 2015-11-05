@@ -6,9 +6,11 @@ var mongoose = require('mongoose'),
 var AddLocationSchema = new Schema({
   name: String,
   info: String,
-  coords: String,
+  latitude: String,
+  longitude: String,
   tags: [],
   userid: String,
+  date: { type: Date, default: Date.now },
   active: Boolean
 });
 

@@ -28,6 +28,7 @@ exports.showlocation = function(req, res) {
 };
 
 exports.validate = function(req, res) {
+  console.log(req.params.id);
   AddLocation.find({name : req.params.id}, function (err, addLocations) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(addLocations);

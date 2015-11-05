@@ -7,11 +7,9 @@ angular.module('campforfreeApp')
     $http.get('/api/addLocations/'+id).success(function(locations) {
       $scope.locations = locations;
       socket.syncUpdates('addLocation', $scope.locations);
-      var coords = $scope.locations.coords;
-      var result = coords.split(",");
       var pos = {
-        lat: parseFloat(result[0]),
-        lng: parseFloat(result[1])
+        lat: parseFloat($scope.locations.latitude),
+        lng: parseFloat($scope.locations.longitude)
       };
       $scope.Name = $scope.locations.name;
       $scope.Info = $scope.locations.info;
@@ -39,11 +37,13 @@ angular.module('campforfreeApp')
         var setMarker = function(){
           // console.log(pos.lat + ',' + pos.lng);
             if(marker){
-              $scope.positions = pos.lat() + ',' + pos.lng();
+              $scope.latitude = pos.lat();
+              $scope.longitude = pos.lng();
               marker.setPosition(pos);
               map.setCenter(pos);
             } else {
-              $scope.positions = pos.lat + ',' + pos.lng;
+              $scope.latitude = pos.lat;
+              $scope.longitude = pos.lng;
               marker = new google.maps.Marker({
               position: pos,
               map: map,
@@ -75,7 +75,8 @@ angular.module('campforfreeApp')
            $http.put('/api/addLocations/' + location._id, {
             name: $scope.Name,
             info: $scope.Info,
-            coords: $scope.positions,
+            latitude: $scope.latitude,
+            longitude: $scope.longitude,
             tags: $scope.tagselection
            });
            $scope.Name = '';

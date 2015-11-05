@@ -7,7 +7,7 @@ angular.module('campforfreeApp')
 
       //Get the name from the user that's logged-in
       var user = Auth.getCurrentUser().name;
-      var dbname = "";
+      var validation;
 
       var pos = {
         lat: position.coords.latitude,
@@ -33,13 +33,14 @@ angular.module('campforfreeApp')
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
         var setMarker = function(){
-          // console.log(pos.lat + ',' + pos.lng);
             if(newmarker){
-              $scope.position = pos.lat() + ',' + pos.lng();
+              $scope.latitude = pos.lat();
+              $scope.longitude = pos.lng();
               newmarker.setPosition(pos);
               map.setCenter(pos);
             } else {
-              $scope.position = pos.lat + ',' + pos.lng;
+              $scope.latitude = pos.lat;
+              $scope.longitude = pos.lng;
               newmarker = new google.maps.Marker({
               position: pos,
               map: map,
@@ -59,11 +60,9 @@ angular.module('campforfreeApp')
             $scope.locations = locations;
             socket.syncUpdates('addLocation', $scope.locations);
             for (var i = 0; i <= $scope.locations.length-1; i++) {
-              var coords = $scope.locations[i].coords;
-              var result = coords.split(",");
               var latlng = {
-                lat: parseFloat(result[0]),
-                lng: parseFloat(result[1])
+                lat: parseFloat($scope.locations[i].latitude),
+                lng: parseFloat($scope.locations[i].longitude)
               };
               markers = new google.maps.Marker({
                 position: latlng,
@@ -87,32 +86,52 @@ angular.module('campforfreeApp')
         });
 
       $scope.addLoc = function(form) {
-        // var validation = false;
-        // var kojk = $http.get('/api/addLocations/validate/'+$scope.Name).success(function(locations) {
-        // });
-        
-       if (form.$valid) {
-         $http.post('/api/addLocations', {
-          name: $scope.Name,
-          info: $scope.Info,
-          coords: $scope.position,
-          userid: user,
-          tags: $scope.tagselection
-         }).then(function(){
-           $scope.Name = '';
-           $scope.Info = '';
-           var tags = document.getElementsByClassName('tags');
-           for (var i = 0; i <= tags.length - 1; i++) {
-             tags[i].checked = false;
-           };
-           for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
-             $scope.toggleSelection($scope.tagselection[i]);
-           };
-           loadMarkers();
-           $scope.message = "Platsen tillagd";
-           $location.path("/minaplatser");
-          });
-       }
+        var validName;
+        var keepGoing = true;
+        $http.get('/api/addLocations/').success(function(validlocation) {
+            angular.forEach(validlocation, function(value, key) {
+              if (keepGoing) {
+                if(value.name != $scope.Name){
+                  validName = true;
+                } 
+                else {
+                  validName = false;
+                  keepGoing = false;
+                }
+                console.log(value.latitude + " , " + value.longitude);
+              };
+            });
+
+
+         if (form.$valid) {
+          if (validName) {
+            console.log("Skickat");
+             // $http.post('/api/addLocations', {
+             //  name: $scope.Name,
+             //  info: $scope.Info,
+             //  latitude: $scope.latitude,
+             //  longitude: $scope.longitude,
+             //  userid: user,
+             //  tags: $scope.tagselection
+             // }).then(function(){
+             //   $scope.Name = '';
+             //   $scope.Info = '';
+             //   var tags = document.getElementsByClassName('tags');
+             //   for (var i = 0; i <= tags.length - 1; i++) {
+             //     tags[i].checked = false;
+             //   };
+             //   for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+             //     $scope.toggleSelection($scope.tagselection[i]);
+             //   };
+             //   loadMarkers();
+             //   $scope.message = "Platsen tillagd";
+             //   $location.path("/minaplatser");
+             //  });
+           } else {
+            $scope.message = "Användarnamnet upptaget, välj ett annat!";
+           }
+         }
+        });
       };
 
       $scope.deleteLocation = function(location) {
