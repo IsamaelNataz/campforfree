@@ -43,10 +43,14 @@ angular.module('campforfreeApp')
           });
           
           google.maps.event.addListener(marker, 'click', function(){
-              $scope.name = this.title;
-              $scope.info = this.info;
-              $scope.tags = this.tags;
-              console.log(this.title);
+            var id = this.title;
+            $http.get('/api/addLocations/showlocation/'+id).success(function(showloc) {
+              $scope.showloc = showloc[0];
+            });
+            // $scope.name = this.title;
+            //   $scope.info = this.info;
+            //   $scope.tags = this.tags;
+            //   console.log(this.title);
           });
         }
 

@@ -6,10 +6,15 @@
   
 
   <footer class="footer">
-     <div class="container">
+     <!-- <div class="container">
         <h1>Name: {{ name }}</h1>
         <p>{{ info }}</p>
         <button class="btn btn-warning" ng-repeat="tag in tags">{{ tag }}</button>
+      </div>  -->
+      <div class="container">
+        <h1>Name: {{ showloc.name }}</h1>
+        <p>Info: {{ showloc.info }}</p>
+        <button class="btn btn-warning" ng-repeat="tag in showloc.tags">{{ tag }}</button>
       </div> 
         <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
   </footer>
