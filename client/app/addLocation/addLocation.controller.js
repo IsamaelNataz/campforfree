@@ -105,28 +105,27 @@ angular.module('campforfreeApp')
 
          if (form.$valid) {
           if (validName) {
-            console.log("Skickat");
-             // $http.post('/api/addLocations', {
-             //  name: $scope.Name,
-             //  info: $scope.Info,
-             //  latitude: $scope.latitude,
-             //  longitude: $scope.longitude,
-             //  userid: user,
-             //  tags: $scope.tagselection
-             // }).then(function(){
-             //   $scope.Name = '';
-             //   $scope.Info = '';
-             //   var tags = document.getElementsByClassName('tags');
-             //   for (var i = 0; i <= tags.length - 1; i++) {
-             //     tags[i].checked = false;
-             //   };
-             //   for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
-             //     $scope.toggleSelection($scope.tagselection[i]);
-             //   };
-             //   loadMarkers();
-             //   $scope.message = "Platsen tillagd";
-             //   $location.path("/minaplatser");
-             //  });
+             $http.post('/api/addLocations', {
+              name: $scope.Name,
+              info: $scope.Info,
+              latitude: $scope.latitude,
+              longitude: $scope.longitude,
+              userid: user,
+              tags: $scope.tagselection
+             }).then(function(){
+               $scope.Name = '';
+               $scope.Info = '';
+               var tags = document.getElementsByClassName('tags');
+               for (var i = 0; i <= tags.length - 1; i++) {
+                 tags[i].checked = false;
+               };
+               for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+                 $scope.toggleSelection($scope.tagselection[i]);
+               };
+               loadMarkers();
+               $scope.message = "Platsen tillagd";
+               $location.path("/minaplatser");
+              });
            } else {
             $scope.message = "Användarnamnet upptaget, välj ett annat!";
            }
