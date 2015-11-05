@@ -44,21 +44,23 @@ angular.module('campforfreeApp')
               });
             }
           });
+          $scope.$on('$destroy', function() {
+            socket.unsyncUpdates('addLocation');
+          });
         };
         loadMarkers();
 
       $scope.deleteLocation = function(location) {
-       $http.delete('/api/addLocations/' + location._id).then(function(){
-        loadMarkers();
-       });
+        var kojk;
+        kojk = confirm("Är du säker att du vill ta bort " + location.name +"?");
+        if(kojk){
+          $http.delete('/api/addLocations/' + location._id).then(function(){ 
+           loadMarkers();
+          });
+        }
       };
+    } // END of initialize :::
 
-      $scope.$on('$destroy', function () {
-        socket.unsyncUpdates('addLocation');
-      });
-
-      } // END of initialize :::
-
-      initialize(pos);
+    initialize(pos);
 
 });

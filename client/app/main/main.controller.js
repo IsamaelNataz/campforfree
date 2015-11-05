@@ -42,7 +42,7 @@ angular.module('campforfreeApp')
             tags: $scope.locations[i].tags
           });
           
-          google.maps.event.addListener(marker, 'click', function(){
+          google.maps.event.addListener(marker, $scope, 'click', function(){
             var id = this.title;
             $http.get('/api/addLocations/showlocation/'+id).success(function(showloc) {
               $scope.showloc = showloc[0];

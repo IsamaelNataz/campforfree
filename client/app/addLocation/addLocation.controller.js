@@ -15,8 +15,6 @@ angular.module('campforfreeApp')
       };
 
       function initialize(pos) {
-        var $latitude = document.getElementById('latitude');
-        var $longitude = document.getElementById('longitude');
         var latitude = pos.lat;
         var longitude = pos.lng;
         var zoom = 7;
@@ -80,15 +78,11 @@ angular.module('campforfreeApp')
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
-          $latitude.value = pos.lat();
-          $longitude.value = pos.lng();
           setMarker();
         });
         // Marker DRAG event :::
         google.maps.event.addListener(newmarker, 'dragend', function(e){
           pos = e.latLng;
-          $latitude.value = pos.lat();
-          $longitude.value = pos.lng();
           setMarker();
         });
 
@@ -116,6 +110,7 @@ angular.module('campforfreeApp')
            };
            loadMarkers();
            $scope.message = "Platsen tillagd";
+           $location.path("/minaplatser");
           });
        }
       };

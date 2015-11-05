@@ -13,8 +13,6 @@ angular.module('campforfreeApp')
         lat: parseFloat(result[0]),
         lng: parseFloat(result[1])
       };
-
-      console.log(pos);
       $scope.Name = $scope.locations.name;
       $scope.Info = $scope.locations.info;
       $scope.tagselection = $scope.locations.tags;
@@ -22,8 +20,6 @@ angular.module('campforfreeApp')
     });
 
     function initialize(pos) {
-        var $latitude = document.getElementById('latitude');
-        var $longitude = document.getElementById('longitude');
         var latitude = pos.lat;
         var longitude = pos.lng;
         var zoom = 7;
@@ -66,51 +62,26 @@ angular.module('campforfreeApp')
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
-          $latitude.value = pos.lat();
-          $longitude.value = pos.lng();
           setMarker();
         });
         // Marker DRAG event :::
         google.maps.event.addListener(marker, 'dragend', function(e){
           pos = e.latLng;
-          $latitude.value = pos.lat();
-          $longitude.value = pos.lng();
           setMarker();
         });
 
-        $scope.editLoc = function(location) {
-        var validation = true;
-        var alertMessage = '';
-
-
-        if($scope.Name === undefined && $scope.Info === undefined){
-          alertMessage = 'Fyll i fälten';
-          validation = false;
-        }
-        else if($scope.Name === undefined) {
-           alertMessage = 'Fyll i namn';
-           validation = false;
-       }
-       else if ($scope.Info === undefined){
-         alertMessage = 'Fyll i info';
-         validation = false;
-       }
-
-       if (alertMessage) {
-        alert(alertMessage);
-       }
-
-       if (validation) {
-         $http.put('/api/addLocations/' + location._id, {
-          name: $scope.Name,
-          info: $scope.Info,
-          coords: $scope.positions,
-          tags: $scope.tagselection
-         });
-         $scope.Name = '';
-         $scope.Info = '';
-         $location.path("/addLocation");
-       }
+        $scope.editLoc = function(form, location) {
+         if (form.$valid) {
+           $http.put('/api/addLocations/' + location._id, {
+            name: $scope.Name,
+            info: $scope.Info,
+            coords: $scope.positions,
+            tags: $scope.tagselection
+           });
+           $scope.Name = '';
+           $scope.Info = '';
+           $location.path("/minaplatser");
+         }
       };
 
       $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];

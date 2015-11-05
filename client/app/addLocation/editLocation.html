@@ -4,16 +4,16 @@
 <div class="col-md-4">
 	<h1>Redigera platsen: {{ locations.name }}</h1>
 	<div class="form-group">
-	  <label for="Name">Namn:</label>
-	  <input type="text" class="form-control" ng-model="Name" name="Name">
-	  <label for="Info">Info:</label>
-	  <textarea class="form-control" ng-model="Info" name="Info"></textarea>
-	  <input type="hidden" class="form-control" id="latitude" placeholder="latitude">
-	  <input type="hidden" class="form-control" id="longitude" placeholder="longitude">
-	  <label ng-repeat="tagName in Tags" class="checkbox-inline">
-		  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="tagselection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
-	  </label>
-	  <button type="submit" class="btn btn-warning form-control" ng-click="editLoc(locations)" name="button">Spara</button>
+	  <form name="form" ng-submit="editLoc(form, locations)">
+		  <label for="Name">Namn:</label>
+		  <input type="text" class="form-control" ng-model="Name" name="Name" required>
+		  <label for="Info">Info:</label>
+		  <textarea class="form-control" ng-model="Info" name="Info" required></textarea>
+		  <label ng-repeat="tagName in Tags" class="checkbox-inline">
+			  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="tagselection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
+		  </label>
+		  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
+	  </form>
 	</div>
 </div>
 
