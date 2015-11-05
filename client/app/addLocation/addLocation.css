@@ -6,11 +6,15 @@
 	height: 50vh;
 }
 
+.col-md-4.ng-scope{
+	background: #f8f8f8;
+	z-index: 12;
+	margin-left: 10px;
+}
 .col-md-6.ng-scope{
 	background: #f8f8f8;
 	z-index: 12;
 }
-
 button .btn{
     outline: none;
 }

@@ -2,11 +2,10 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-      var pos = {
+    var pos = {
         lat: 57.4296853,
         lng: 12.1612335
       };
-
     function initialize(pos) {
       var marker;
       var infowindow; 
@@ -54,4 +53,5 @@ angular.module('campforfreeApp')
       });        
     } // END of initialize :::
     initialize(pos);
+    //google.maps.event.addDomListener(window, 'load', initialize);
   });
