@@ -36,8 +36,8 @@ angular.module('campforfreeApp')
             socket.syncUpdates('addLocation', $scope.locations);
             for (var i = 0; i <= $scope.locations.length-1; i++) {
               var latlng = {
-                lat: parseFloat($scope.locations[i].latitude),
-                lng: parseFloat($scope.locations[i].longitude)
+                lat: $scope.locations[i].latitude,
+                lng: $scope.locations[i].longitude
               };
               markers = new google.maps.Marker({
                 position: latlng,
@@ -53,9 +53,8 @@ angular.module('campforfreeApp')
         loadMarkers();
 
       $scope.deleteLocation = function(location) {
-        var kojk;
-        kojk = confirm("Är du säker att du vill ta bort " + location.name +"?");
-        if(kojk){
+        var res = confirm("Är du säker att du vill ta bort " + location.name +"?");
+        if(res){
           $http.delete('/api/addLocations/' + location._id).then(function(){ 
            loadMarkers();
           });

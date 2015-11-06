@@ -61,8 +61,8 @@ angular.module('campforfreeApp')
             socket.syncUpdates('addLocation', $scope.locations);
             for (var i = 0; i <= $scope.locations.length-1; i++) {
               var latlng = {
-                lat: parseFloat($scope.locations[i].latitude),
-                lng: parseFloat($scope.locations[i].longitude)
+                lat: $scope.locations[i].latitude,
+                lng: $scope.locations[i].longitude
               };
               markers = new google.maps.Marker({
                 position: latlng,
@@ -86,50 +86,49 @@ angular.module('campforfreeApp')
         });
 
       $scope.addLoc = function(form) {
-        var validName;
-        var keepGoing = true;
+        var validation = true;
+        var error = "";
         $http.get('/api/addLocations/').success(function(validlocation) {
-            angular.forEach(validlocation, function(value, key) {
-              if (keepGoing) {
-                if(value.name != $scope.Name){
-                  validName = true;
-                } 
-                else {
-                  validName = false;
-                  keepGoing = false;
+            for (var i = 0; i <= validlocation.length-1; i++) {
+                if($scope.Name == validlocation[i].name){
+                  validation = false;
+                  error = "Användarnamnet upptaget, var god välj ett annat!";
+                  break;
                 }
-                console.log(value.latitude + " , " + value.longitude);
-              };
-            });
+                else if($scope.latitude.toFixed(5) == validlocation[i].latitude.toFixed(5) && $scope.longitude.toFixed(5) == validlocation[i].longitude.toFixed(5)){
+                  validation = false;
+                  error = "Platsen är redan utmarkerad, var god välj en annan plats!";
+                  break;
+                }
+            };
 
-
-         if (form.$valid) {
-          if (validName) {
-             $http.post('/api/addLocations', {
-              name: $scope.Name,
-              info: $scope.Info,
-              latitude: $scope.latitude,
-              longitude: $scope.longitude,
-              userid: user,
-              tags: $scope.tagselection
-             }).then(function(){
-               $scope.Name = '';
-               $scope.Info = '';
-               var tags = document.getElementsByClassName('tags');
-               for (var i = 0; i <= tags.length - 1; i++) {
-                 tags[i].checked = false;
-               };
-               for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
-                 $scope.toggleSelection($scope.tagselection[i]);
-               };
-               loadMarkers();
-               $scope.message = "Platsen tillagd";
-               $location.path("/minaplatser");
-              });
-           } else {
-            $scope.message = "Användarnamnet upptaget, välj ett annat!";
+           if (form.$valid) {
+            if (validation) {
+               $http.post('/api/addLocations', {
+                name: $scope.Name,
+                info: $scope.Info,
+                latitude: $scope.latitude,
+                longitude: $scope.longitude,
+                userid: user,
+                tags: $scope.tagselection
+               }).then(function(){
+                 $scope.Name = '';
+                 $scope.Info = '';
+                 var tags = document.getElementsByClassName('tags');
+                 for (var i = 0; i <= tags.length - 1; i++) {
+                   tags[i].checked = false;
+                 };
+                 for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+                   $scope.toggleSelection($scope.tagselection[i]);
+                 };
+                 loadMarkers();
+                 $scope.message = "Platsen tillagd";
+                 $location.path("/minaplatser");
+                });
+             } else {
+              $scope.message = error;
+             }
            }
-         }
         });
       };
 

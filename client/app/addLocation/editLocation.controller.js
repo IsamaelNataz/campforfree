@@ -35,7 +35,6 @@ angular.module('campforfreeApp')
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
         var setMarker = function(){
-          // console.log(pos.lat + ',' + pos.lng);
             if(marker){
               $scope.latitude = pos.lat();
               $scope.longitude = pos.lng();
@@ -71,18 +70,37 @@ angular.module('campforfreeApp')
         });
 
         $scope.editLoc = function(form, location) {
-         if (form.$valid) {
-           $http.put('/api/addLocations/' + location._id, {
-            name: $scope.Name,
-            info: $scope.Info,
-            latitude: $scope.latitude,
-            longitude: $scope.longitude,
-            tags: $scope.tagselection
-           });
-           $scope.Name = '';
-           $scope.Info = '';
-           $location.path("/minaplatser");
-         }
+          var validation = true;
+          var error = "";
+          $http.get('/api/addLocations/').success(function(validlocation) {
+            for (var i = 0; i <= validlocation.length-1; i++) {
+                if($scope.Name == validlocation[i].name){
+                  if (validlocation[i]._id != location._id) {
+                    validation = false;
+                    error = "Användarnamnet upptaget, var god välj ett annat!";
+                    break;
+                  }
+                }
+            };
+
+           if (form.$valid) {
+            if (validation) {
+               $http.put('/api/addLocations/' + location._id, {
+                name: $scope.Name,
+                info: $scope.Info,
+                latitude: $scope.latitude,
+                longitude: $scope.longitude,
+                tags: $scope.tagselection
+               });
+               $scope.Name = '';
+               $scope.Info = '';
+               $location.path("/minaplatser");
+             }else{
+                $scope.message = error;
+             }
+           }
+
+          });
       };
 
       $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
