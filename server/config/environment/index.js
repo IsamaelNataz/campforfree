@@ -57,9 +57,9 @@ var all = {
   },
 
   google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
+    clientID:     process.env.GOOGLE_ID || '655359865288-4ri07p0uf670447hfm66babailev9f4l.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || '6BfvENBd7ZeGRC6t3hIj9nfZ',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/oauth2callback'
   }
 };
 
