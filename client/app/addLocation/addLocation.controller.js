@@ -77,6 +77,7 @@ angular.module('campforfreeApp')
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
+          console.log(pos.lat());
           setMarker();
         });
         // Marker DRAG event :::
@@ -95,6 +96,7 @@ angular.module('campforfreeApp')
                   error = "Användarnamnet upptaget, var god välj ett annat!";
                   break;
                 }
+
                 else if($scope.latitude.toFixed(5) == validlocation[i].latitude.toFixed(5) && $scope.longitude.toFixed(5) == validlocation[i].longitude.toFixed(5)){
                   validation = false;
                   error = "Platsen är redan utmarkerad, var god välj en annan plats!";

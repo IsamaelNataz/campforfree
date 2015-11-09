@@ -8,7 +8,7 @@ angular.module('campforfreeApp')
       };
     function initialize(pos) {
       var marker;
-      var infowindow; 
+      var infowindow;
       var content;
       var zoom = 7;
       var latitude = pos.lat;
@@ -39,20 +39,24 @@ angular.module('campforfreeApp')
             info: $scope.locations[i].info,
             tags: $scope.locations[i].tags
           });
-          
-          google.maps.event.addListener(marker, $scope, 'click', function(){
+
+          google.maps.event.addListener(marker, 'click', function(){
             var id = this.title;
             $http.get('/api/addLocations/showlocation/'+id).success(function(showloc) {
               $scope.showloc = showloc[0];
             });
-            // $scope.name = this.title;
-            //   $scope.info = this.info;
-            //   $scope.tags = this.tags;
-            //   console.log(this.title);
+            $('#infoBox').toggleClass('show');
+            $scope.name = this.title;
+              $scope.info = this.info;
+              $scope.tags = this.tags;
+              console.log(this.title);
           });
-        }
 
-      });        
+        }
+        $('#close-infoBox').click(function(){
+          $('#infoBox').toggleClass('show');
+        });
+      });
     } // END of initialize :::
     initialize(pos);
     //google.maps.event.addDomListener(window, 'load', initialize);
