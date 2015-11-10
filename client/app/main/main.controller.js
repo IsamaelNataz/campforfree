@@ -2,6 +2,9 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
+    // The infoBox
+    $('#infoBox').hide();
+
     var pos = {
         lat: 57.4296853,
         lng: 12.1612335
@@ -45,7 +48,7 @@ angular.module('campforfreeApp')
             $http.get('/api/addLocations/showlocation/'+id).success(function(showloc) {
               $scope.showloc = showloc[0];
             });
-            $('#infoBox').toggleClass('show');
+            $('#infoBox').fadeToggle('slow');
             $scope.name = this.title;
               $scope.info = this.info;
               $scope.tags = this.tags;
@@ -53,8 +56,12 @@ angular.module('campforfreeApp')
           });
 
         }
-        $('#close-infoBox').click(function(){
-          $('#infoBox').toggleClass('show');
+        $('#close-infoBox').click(function(e){
+          $scope.name = '';
+            $scope.info = '';
+            $scope.tags = '';
+          $('#infoBox').fadeToggle('slow');
+          // $('#infoBox').removeClass('show');
         });
       });
     } // END of initialize :::
