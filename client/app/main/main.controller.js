@@ -2,13 +2,16 @@
 
 angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
+    // The infoBox
+    $('#infoBox').hide();
+
     var pos = {
         lat: 57.4296853,
         lng: 12.1612335
       };
     function initialize(pos) {
       var marker;
-      var infowindow; 
+      var infowindow;
       var content;
       var zoom = 7;
       var latitude = pos.lat;
@@ -44,20 +47,28 @@ angular.module('campforfreeApp')
             tags: $scope.locations[i].tags,
             icon: '../../assets/images/Untitled-1-01.svg'
           });
-          
-          google.maps.event.addListener(marker, $scope, 'click', function(){
+
+          google.maps.event.addListener(marker, 'click', function(){
             var id = this.title;
             $http.get('/api/addLocations/showlocation/'+id).success(function(showloc) {
               $scope.showloc = showloc[0];
             });
-            // $scope.name = this.title;
-            //   $scope.info = this.info;
-            //   $scope.tags = this.tags;
-            //   console.log(this.title);
+            $('#infoBox').fadeToggle('slow');
+            $scope.name = this.title;
+              $scope.info = this.info;
+              $scope.tags = this.tags;
+              console.log(this.title);
           });
-        }
 
-      });        
+        }
+        $('#close-infoBox').click(function(e){
+          $scope.name = '';
+            $scope.info = '';
+            $scope.tags = '';
+          $('#infoBox').fadeToggle('slow');
+          // $('#infoBox').removeClass('show');
+        });
+      });
     } // END of initialize :::
     initialize(pos);
     //google.maps.event.addDomListener(window, 'load', initialize);

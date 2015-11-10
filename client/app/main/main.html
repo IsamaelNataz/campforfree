@@ -1,13 +1,16 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+  <div id="infoBox" class="">
+    <h1 id="close-infoBox" class="text-right">X</h1>
+    <div class="container">
+       <h1>{{ name }}</h1>
+       <p>{{ info }}</p>
+       <button class="btn btn-warning" ng-repeat="tag in tags">{{ tag }}</button>
+     </div>
+  </div>
   <div id="map">
   </div>
-
   <footer class="footer">
-     <div class="container">
-        <h1>{{ name }}</h1>
-        <p>{{ info }}</p>
-        <button class="btn btn-warning" ng-repeat="tag in tags">{{ tag }}</button>
-      </div> 
+    <p><span class="glyphicon glyphicon-heart" style="color : red"></span></p>
+
       <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
   </footer>
-
