@@ -3,6 +3,16 @@
 angular.module('campforfreeApp')
   .controller('MyLocationCtrl', function ($scope, $http, $location, socket, Auth) {
 
+      $scope.MyLoc = function(){
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          initialize(pos);
+        });
+      }
+
       var pos = {
         lat: 57.4296853,
         lng: 12.1612335
@@ -26,7 +36,6 @@ angular.module('campforfreeApp')
         };
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
-        // var loadMarkers = function(){
         $http.get('/api/addLocations/Myplaces').success(function(locations) {
           $scope.locations = locations;
           if(locations.length == 0){
@@ -39,10 +48,12 @@ angular.module('campforfreeApp')
               lat: locations[i].latitude,
               lng: locations[i].longitude
             };
+
             marker = new google.maps.Marker({
               position: latlng,
               map: map,
-              title: locations[i].name
+              title: locations[i].name,
+              icon: '../../assets/images/Untitled-1-01.svg'
             });
             markers.push(marker);
           }
@@ -66,9 +77,6 @@ angular.module('campforfreeApp')
           };
 
         });
-        // };
-        // loadMarkers();
-
 
     } // END of initialize :::
 
