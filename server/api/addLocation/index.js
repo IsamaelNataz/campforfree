@@ -9,7 +9,6 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/Myplaces', auth.isAuthenticated(), controller.myplaces);
 router.get('/showLocation/:id', controller.showlocation);
-router.get('/validate/:id', controller.validate);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

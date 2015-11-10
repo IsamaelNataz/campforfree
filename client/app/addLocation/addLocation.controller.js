@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth, multipartForm) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
-
       //Get the name from the user that's logged-in
       var user = Auth.getCurrentUser().name;
-      var validation;
 
       var pos = {
         lat: position.coords.latitude,
@@ -85,9 +83,14 @@ angular.module('campforfreeApp')
           setMarker();
         });
 
+      $scope.loc = {};
+
       $scope.addLoc = function(form) {
+        $scope.submitted = true;
+        var uploadUrl = "/upload";
         var validation = true;
         var error = "";
+        console.log(form.Name);
         $http.get('/api/addLocations/').success(function(validlocation) {
             for (var i = 0; i <= validlocation.length-1; i++) {
                 if($scope.Name == validlocation[i].name){
@@ -122,6 +125,7 @@ angular.module('campforfreeApp')
                    $scope.toggleSelection($scope.tagselection[i]);
                  };
                  loadMarkers();
+                 multipartForm.post(uploadUrl, $scope.locfile);
                  $scope.message = "Platsen tillagd";
                  $location.path("/minaplatser");
                 });

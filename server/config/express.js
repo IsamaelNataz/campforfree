@@ -18,6 +18,8 @@ var passport = require('passport');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -31,6 +33,11 @@ module.exports = function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
+  app.post('/upload', upload.single('locationPic'), function (req, res, next) {
+    console.log(req.body);
+    console.log(req.file);
+    res.json({success: true});
+  })
 
   // Persist sessions with mongoStore
   // We need to enable sessions for passport twitter because its an oauth 1.0 strategy

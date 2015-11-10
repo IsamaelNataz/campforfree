@@ -8,15 +8,20 @@
 
 <div class="col-md-4">
 	<h1>Lägg till ny plats</h1>
-	<div class="form-group">
-		<form name="form" ng-submit="addLoc(form)">
-		  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn" required/>
-		  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info" required></textarea>
+	<form name="form" ng-submit="addLoc(form)" novalidate>
+		<div class="form-group">
+		  <input type="text" class="form-control" ng-model="Name" name="name" placeholder="Namn" required>
+		  <textarea type="text" class="form-control" ng-model="Info" name="info" value="" placeholder="Info" required></textarea>
 		  <label ng-repeat="tagName in Tags" class="checkbox-inline">
 			  <input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
-		  </label>
+		  </label><br>
+		  <label for="locationPic">Bild:</label>
+		  <input type="file" id="locationPic" name="locationPic" file-model="locfile">
 		  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
-		</form>
-		<p class="help-block"> {{ message }} </p>
-	</div>
+		</div>
+	</form>
+	<p class="help-block" ng-show="form.name.$error.required && form.info.$error.required && submitted">
+         Var vänlig och fyll i både namn och info.
+    </p>
+	<p class="help-block"> {{ message }} </p>
 </div>
