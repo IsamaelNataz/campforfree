@@ -56,18 +56,18 @@ angular.module('campforfreeApp')
         setMarker();
 
         var loadMarkers = function(){
-          $http.get('/api/addLocations/Myplaces').success(function(locations) {
+          $http.get('/api/addLocations/').success(function(locations) {
             $scope.locations = locations;
             socket.syncUpdates('addLocation', $scope.locations);
-            for (var i = 0; i <= $scope.locations.length-1; i++) {
+            for (var i = 0; i <= locations.length-1; i++) {
               var latlng = {
-                lat: $scope.locations[i].latitude,
-                lng: $scope.locations[i].longitude
+                lat: locations[i].latitude,
+                lng: locations[i].longitude
               };
               markers = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: $scope.locations[i].name
+                title: locations[i].name
               });
             }
           });
@@ -133,16 +133,6 @@ angular.module('campforfreeApp')
            }
         });
       };
-
-      $scope.deleteLocation = function(location) {
-       $http.delete('/api/addLocations/' + location._id).then(function(){
-        loadMarkers();
-       });
-      };
-
-      $scope.$on('$destroy', function () {
-        socket.unsyncUpdates('addLocation');
-      });
 
       $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
 

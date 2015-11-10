@@ -12,8 +12,8 @@ angular.module('campforfreeApp')
         var latitude = pos.lat;
         var longitude = pos.lng;
         var zoom = 7;
-        var newmarker;
-        var markers;
+        var marker;
+        var markers = [];
 
         var LatLng = new google.maps.LatLng(latitude, longitude);
         var mapOptions = {
@@ -26,40 +26,50 @@ angular.module('campforfreeApp')
         };
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
-        var loadMarkers = function(){
-          $http.get('/api/addLocations/Myplaces').success(function(locations) {
-            $scope.locations = locations;
-            if(locations.length == 0){
-              $scope.message = "Du har ej lagt till några platser!";
-              $('table').hide();
-            }
-            socket.syncUpdates('addLocation', $scope.locations);
-            for (var i = 0; i <= $scope.locations.length-1; i++) {
-              var latlng = {
-                lat: $scope.locations[i].latitude,
-                lng: $scope.locations[i].longitude
-              };
-              markers = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                title: $scope.locations[i].name
+        // var loadMarkers = function(){
+        $http.get('/api/addLocations/Myplaces').success(function(locations) {
+          $scope.locations = locations;
+          if(locations.length == 0){
+            $scope.message = "Du har ej lagt till några platser!";
+            $('table').hide();
+          }
+          socket.syncUpdates('addLocation', $scope.locations);
+          for (var i = 0; i <= locations.length-1; i++) {
+            var latlng = {
+              lat: locations[i].latitude,
+              lng: locations[i].longitude
+            };
+            marker = new google.maps.Marker({
+              position: latlng,
+              map: map,
+              title: locations[i].name
+            });
+            markers.push(marker);
+          }
+
+          $scope.deleteLocation = function(location) {
+            var res = confirm("Är du säker att du vill ta bort " + location.name +"?");
+            if(res){
+              $http.delete('/api/addLocations/' + location._id).then(function(){
+                 angular.forEach(markers, function(value, key){
+                  if (value.title == location.name){
+                    markers[key].setMap(null);
+                    markers.splice(key, 1);
+                  }
+                 });
+                 if (markers.length == 0) {
+                    $scope.message = "Du har ej lagt till några platser!";
+                    $('table').hide();
+                 }
               });
             }
-          });
-          $scope.$on('$destroy', function() {
-            socket.unsyncUpdates('addLocation');
-          });
-        };
-        loadMarkers();
+          };
 
-      $scope.deleteLocation = function(location) {
-        var res = confirm("Är du säker att du vill ta bort " + location.name +"?");
-        if(res){
-          $http.delete('/api/addLocations/' + location._id).then(function(){ 
-           loadMarkers();
-          });
-        }
-      };
+        });
+        // };
+        // loadMarkers();
+
+
     } // END of initialize :::
 
     initialize(pos);
