@@ -10,12 +10,10 @@
 		  <label for="Info">Info:</label>
 		  <textarea class="form-control" ng-model="Info" name="Info" required></textarea>
 		  <label ng-repeat="tagName in Tags" class="checkbox-inline">
-			  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="tagselection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
+			  <input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="tagselection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"><span class="{{tagName}}"></span>
 		  </label>
 		  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
 	  </form>
 	  <p class="help-block"> {{ message }} </p>
 	</div>
 </div>
-
-

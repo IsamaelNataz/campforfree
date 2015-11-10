@@ -134,7 +134,8 @@ angular.module('campforfreeApp')
         });
       };
 
-      $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
+      // $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
+      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
 
       // selected tags
       $scope.tagselection = [];

@@ -13,7 +13,7 @@
 		  <input type="text" class="form-control" ng-model="Name" name="Name" value="" placeholder="Namn" required/>
 		  <textarea type="text" class="form-control" ng-model="Info" name="Info" value="" placeholder="Info" required></textarea>
 		  <label ng-repeat="tagName in Tags" class="checkbox-inline">
-			  <input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)">{{tagName}}
+			  <input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"><span class="{{tagName}}"></span>
 		  </label>
 		  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
 		</form>

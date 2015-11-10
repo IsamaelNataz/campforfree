@@ -4,13 +4,11 @@
     <div class="container">
        <h1>{{ name }}</h1>
        <p>{{ info }}</p>
-       <button class="btn btn-warning" ng-repeat="tag in tags">{{ tag }}</button>
+       <span ng-repeat="tag in tags"><i class='{{ tag }}'></i></span>
      </div>
   </div>
   <div id="map">
   </div>
   <footer class="footer">
-    <p><span class="glyphicon glyphicon-heart" style="color : red"></span></p>
-
       <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
   </footer>

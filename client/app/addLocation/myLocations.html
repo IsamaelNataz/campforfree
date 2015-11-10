@@ -22,7 +22,7 @@
 					<td>{{ location.info }}</td>
 					<td>{{ location.date | date:'medium' }}</td>
 					<td>{{ location.latitude }}</td>
-					<td ng-repeat="tag in location.tags"><button class="btn btn-danger">{{ tag }}</button></td>
+					<td ng-repeat="tag in location.tags"><span class="{{tag}}"></span></td>
 					<td><a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera plats</button></a></td>
 					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
 				</tr>
