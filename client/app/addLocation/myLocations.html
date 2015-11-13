@@ -4,28 +4,29 @@
 <!-- The Map Container -->
 <div id="map">
 </div>
-<div class="col-md-6">
-	<table class="table">
-			<thead>
-				<h1>Mina platser</h1>
-				<button ng-click="MyLoc()">Min nuvarande plats</button>
-				<tr>
-					<th>Namn</th>
-					<th>Info</th>
-					<th>Tillagd</th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="location in locations | orderBy: 'date':true">
-					<td>{{ location.name }}</td>
-					<td>{{ location.info }}</td>
-					<td>{{ location.date | date:'medium' }}</td>
-					<td ng-repeat="tag in location.tags"><span class="{{tag}}"></span></td>
-					<td><a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera plats</button></a></td>
-					<td><button type="button" class="close" ng-click="deleteLocation(location)">&times;</button></td>
-				</tr>
-			</tbody>
-	</table>
+<div id="mina-platser-input" class="col-xs-12" ng-repeat="location in locations | orderBy: 'date':true">
+		<div class="header">
+			<p class="h4">Namn: </p>
+			<div class="item">{{ location.name }}</div>
+		</div>
+
+		<div class="header">
+			<p class="h4">Tillagd: </p>
+			<div class="item">{{ location.date | date:'medium'}}</div>
+		</div>
+
+		<div class="header">
+			<p class="h4">Tags: </p>
+			<div class="item" ng-repeat="tag in location.tags">
+				<span class="{{tag}}"></span>
+			</div>
+		</div>
+
+		<div class="header">
+			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera plats</button></a>
+		</div>
+		<div class="header">
+			<button type="button" class="close" ng-click="deleteLocation(location)">&times;</button>
+		</div>
 	<p class="help-block"> {{ message }} </p>
 </div>
