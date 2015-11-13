@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campforfreeApp')
-  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth, multipartForm) {
+  .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth, multipartForm, $filter) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
       //Get the name from the user that's logged-in
@@ -15,7 +15,7 @@ angular.module('campforfreeApp')
       function initialize(pos) {
         var latitude = pos.lat;
         var longitude = pos.lng;
-        var zoom = 7;
+        var zoom = 13;
         var newmarker;
         var markers;
 
@@ -88,10 +88,9 @@ angular.module('campforfreeApp')
 
       $scope.addLoc = function(form) {
         $scope.submitted = true;
-        var uploadUrl = "/upload";
+        // var uploadUrl = "/upload";
         var validation = true;
         var error = "";
-        console.log(form.Name);
         $http.get('/api/addLocations/').success(function(validlocation) {
             for (var i = 0; i <= validlocation.length-1; i++) {
                 if($scope.Name == validlocation[i].name){
@@ -108,7 +107,7 @@ angular.module('campforfreeApp')
             };
 
            if (form.$valid) {
-            if (validation) {
+            if (validation) {      
                $http.post('/api/addLocations', {
                 name: $scope.Name,
                 info: $scope.Info,
@@ -119,16 +118,17 @@ angular.module('campforfreeApp')
                }).then(function(){
                  $scope.Name = '';
                  $scope.Info = '';
-                 var tags = document.getElementsByClassName('tags');
-                 for (var i = 0; i <= tags.length - 1; i++) {
-                   tags[i].checked = false;
-                 };
-                 for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
-                   $scope.toggleSelection($scope.tagselection[i]);
-                 };
+                 // var tags = document.getElementsByClassName('tags');
+                 // for (var i = 0; i <= tags.length - 1; i++) {
+                 //   tags[i].checked = false;
+                 // };
+                 // for (var i = 0; i <= $scope.tagselection.length - 1; i++) {
+                 //   $scope.toggleSelection($scope.tagselection[i]);
+                 // };
                  loadMarkers();
-                 multipartForm.post(uploadUrl, $scope.locfile);
+                 //multipartForm.post(uploadUrl, $scope.locfile);
                  $scope.message = "Platsen tillagd";
+                 $scope.tagselection = [];
                  $location.path("/minaplatser");
                 });
              } else {
@@ -140,12 +140,32 @@ angular.module('campforfreeApp')
 
       // $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
       $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
+      // $scope.Tags = [
+      //   { 
+      //     name: 'Badplats',
+      //     icon: 'glyphicon glyphicon-tint'
+      //   },
+      //   {
+      //     name: 'Eldplats',
+      //     icon: 'glyphicon glyphicon-fire'
+      //   },
+      //   {
+      //     name: 'Hav',
+      //     icon: 'glyphicon glyphicon-tree-conifer'
+      //   }
+      // ];
 
-      // selected tags
+      // $scope.tagselection = [];
+
+      // $scope.selectedTags = function () {
+      //   $scope.tagselection = $filter('filter')($scope.Tags, {checked: true});
+      // }; 
+      
       $scope.tagselection = [];
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
+      console.log(tagName);
 
         // is currently selected
         if (id > -1) {
@@ -156,6 +176,7 @@ angular.module('campforfreeApp')
         else {
           $scope.tagselection.push(tagName);
         }
+        console.log($scope.tagselection);
       };
 
       } // END of initialize :::

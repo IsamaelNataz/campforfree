@@ -47,9 +47,9 @@ body{
 
 #map{
   position: absolute;
-  top: 0;
+  top: 50px;
   left: 0;
-  height: 100vh;
+  height:-webkit-calc(100% - 100px);
   width: 100%;
   overflow: hidden;
 }
@@ -81,4 +81,51 @@ body{
    color: white;
    margin: 1px;
    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+button .btn{
+    outline: none;
+}
+
+.form-control{
+  margin-bottom: 10px;
+}
+
+/* Navbar */
+#navbarmobile{
+      margin-bottom: 0px;
+}
+
+#myLocation{
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    #navbarmobile, #myLocation{
+      display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #hamburger,
+    .footer, 
+    #desktop {
+      display: none;
+    }
+    .navbar-default .navbar-toggle{
+      border: none;
+    }
+
+    .navbar-default .navbar-toggle:focus, 
+    .navbar-default .navbar-toggle:hover {
+      background: none;
+    }
+
+    #myLocation{
+      z-index: 10000;
+      position: absolute;
+      left: 18px;
+      bottom: 8px;
+      font-size: 20px;
+    }
 }

@@ -103,7 +103,7 @@ angular.module('campforfreeApp')
           });
       };
 
-      $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
+      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
 
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
