@@ -5,7 +5,7 @@ body{
 }
 
 .navbar{
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   box-shadow: 0px 0px 15px;
 }
 .thing-form {
@@ -45,11 +45,11 @@ body{
   z-index: 999;
 }
 
-#map{
+.mainMap{
   position: absolute;
   top: 50px;
   left: 0;
-  height:-webkit-calc(100% - 100px);
+  height:calc(100% - 140px);
   width: 100%;
   overflow: hidden;
 }
@@ -63,8 +63,7 @@ body{
     width: 100%;
     text-align: center;
     padding: 30px 0;
-    margin-top: 70px;
-    z-index: 100;
+    z-index: 1000;
     background: #f8f8f8;
 }
 
@@ -83,7 +82,7 @@ body{
    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
 }
 
-button .btn{
+button .btn, button:active, button:focus{
     outline: none;
 }
 
@@ -101,7 +100,7 @@ button .btn{
 }
 
 @media screen and (min-width: 768px) {
-    #navbarmobile, #myLocation{
+    #navbarmobile, #myLocationPin{
       display: none;
     }
 }
@@ -116,16 +115,32 @@ button .btn{
       border: none;
     }
 
+    .navbar{
+      margin: 0px 0px 10px 0px;
+      z-index: 110000;
+    }
+
     .navbar-default .navbar-toggle:focus, 
     .navbar-default .navbar-toggle:hover {
       background: none;
     }
 
-    #myLocation{
-      z-index: 10000;
+    #myLocationPin{
       position: absolute;
+      z-index: 110000;
       left: 18px;
       bottom: 8px;
       font-size: 20px;
+    }
+
+    h1{
+      font-size: 20px;
+      margin-top: 0px;
+    }
+
+    .mainMap{
+      top: 50px;
+      height:calc(100% - 100px);
+      width: 100%;
     }
 }

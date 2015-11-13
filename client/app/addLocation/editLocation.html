@@ -1,8 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div id="map" class="col-md-6">
-</div>
-<div class="col-md-4">
-	<h1>Redigera platsen: {{ locations.name }}</h1>
+
+<div class="col-md-4" id="editLocWrapper">
+	<h1>Redigera: {{ locations.name }}</h1>
 	<div class="form-group">
 	  <form name="form" ng-submit="editLoc(form, locations)">
 		  <label for="Name">Namn:</label>
@@ -17,3 +16,10 @@
 	  <p class="help-block"> {{ message }} </p>
 	</div>
 </div>
+
+<div id="map" class="editAddloc">
+</div>
+
+<footer class="footer">
+      <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
+</footer>

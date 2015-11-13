@@ -2,7 +2,7 @@
 
 
 <!-- The Map Container -->
-<div id="map">
+<div id="map" class="mapMylocation">
 </div>
 <div id="mina-platser-input" class="col-xs-12" ng-repeat="location in locations | orderBy: 'date':true">
 		<div class="header">
@@ -16,17 +16,20 @@
 		</div>
 
 		<div class="header">
-			<p class="h4">Tags: </p>
+			<p class="h4">Taggar: </p>
 			<div class="item" ng-repeat="tag in location.tags">
 				<span class="{{tag}}"></span>
 			</div>
 		</div>
 
 		<div class="header">
-			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera plats</button></a>
+			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera</button></a>
 		</div>
 		<div class="header">
 			<button type="button" class="close" ng-click="deleteLocation(location)">&times;</button>
 		</div>
 	<p class="help-block"> {{ message }} </p>
 </div>
+<footer class="footer">
+      <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
+</footer>

@@ -3,16 +3,6 @@
 angular.module('campforfreeApp')
   .controller('MyLocationCtrl', function ($scope, $http, $location, socket, Auth) {
 
-      $scope.MyLoc = function(){
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          initialize(pos);
-        });
-      }
-
       var pos = {
         lat: 57.4296853,
         lng: 12.1612335
