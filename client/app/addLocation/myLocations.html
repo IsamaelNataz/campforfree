@@ -9,9 +9,6 @@
 	<div class="column">
 		<p class="h4">Tillagd: </p>
 	</div>
-	<div class="column">
-		<p class="h4">Taggar: </p>
-	</div>
 </div> 
 <div class="col-xs-12 rowLocation" ng-repeat="location in locations | orderBy: 'date':true">
 		<div class="column">
@@ -23,16 +20,15 @@
 		</div>
 
 		<div class="column">
-			<div class="item" ng-repeat="tag in location.tags">
-				<img src="../../assets/images/tags/{{tag}}" width="60"></span>
-			</div>
-		</div>
-
-		<div class="column">
 			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info" id="edit">Redigera</button></a>
 		</div>
 		<div class="column">
 			<span class="glyphicon glyphicon-remove" id="remove" ng-click="deleteLocation(location)"></span>
 		</div>
-	<p class="help-block"> {{ message }} </p>
+
+		
+			<div ng-repeat="tag in location.tags">
+				<img src="../../assets/images/tags/{{tag}}" width="60"></span>
+			</div>
 </div>
+	<p class="help-block"> {{ message }} </p>
