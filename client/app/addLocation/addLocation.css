@@ -24,9 +24,9 @@
 
 .mapAddloc{
 	position: absolute;
-  	top: 50px;
+  	top: 70px;
   	left: 0;
-  	height:calc(100% - 50px);
+  	height:calc(100% - 70px);
   	width: 100%;
  }
 
@@ -56,9 +56,9 @@
 
 .editAddloc{
 	position: absolute;
-  	top: 50px;
+  	top: 70px;
   	left: 0;
-  	height:calc(100% - 50px);
+  	height:calc(100% - 70px);
   	width: 100%;
  }
 
@@ -91,14 +91,6 @@
 .header{
 	background: none;
 	color: rgba(25, 51, 0, 1);
-}
-
-.mapMylocation{
-	position: absolute;
-  	top: 50px;
-  	left: 0;
-  	height:calc(100% - 50px);
-  	width: 100%;
 }
 
 .tag{
@@ -153,9 +145,4 @@
 		padding: 0px;*/
 	}
 
-	.mapMylocation{
-      top: 50px;
-      height:calc(100% - 100px);
-      width: 100%;
-    }
 }
