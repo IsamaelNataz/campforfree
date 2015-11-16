@@ -93,7 +93,7 @@ angular.module('campforfreeApp')
               info: $scope.locations[i].info,
               tags: $scope.locations[i].tags,
               // icon: '../../assets/images/Untitled-1-01.svg'
-              icon: '../../assets/images/camping2-01.svg'
+              icon: '../../assets/images/camping3-01.svg'
             });
 
             google.maps.event.addListener(marker, 'click', function(){
