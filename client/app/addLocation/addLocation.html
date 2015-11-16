@@ -11,19 +11,12 @@
 		<div class="form-group">
 		  <input type="text" class="form-control" ng-model="Name" name="name" placeholder="Namn" required>
 		  <textarea type="text" class="form-control" ng-model="Info" name="info" value="" placeholder="Info" required></textarea>
-		  <label ng-repeat="tagName in Tags" class="checkbox-inline">
-			  <input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"><span class="{{tagName}}"></span>
-		  </label>
-
-		  	<!-- <label ng-repeat="tag in Tags" class="checkbox-inline">
-			    <input type="checkbox" name="{{tag.url}}" id="{{tag.name}}" ng-model="tag.checked" ng-change="selectedTags()">
-			    <span class="{{tag.icon}}">{{tag.name}}</span>
-			</label> -->
-
-		  <!-- <br> -->
-		  <!-- <label for="locationPic">Bild:</label>
-		  <input type="file" id="locationPic" name="locationPic" file-model="locfile"> -->
-		  <button type="submit" class="btn btn-warning form-control" name="button">Spara</button>
+		  <!-- <div class="checkbox"> -->
+		  	<label ng-repeat="tagName in Tags" class="checkBox">
+		  		<input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"> <img src="../../assets/images/tags/{{tagName}}" width="30">
+			</label>
+		  <!-- </div> -->
+		  <button type="submit" class="btn btn-warning form-control" id="addButton" name="button">Spara</button>
 		</div>
 	</form>
 	<p class="help-block" ng-show="form.name.$error.required && form.info.$error.required && submitted">

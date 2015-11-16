@@ -114,7 +114,8 @@ angular.module('campforfreeApp')
               markers = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: locations[i].name
+                title: locations[i].name,
+                icon: '../../assets/images/camping2-01.svg'
               });
             }
           });
@@ -188,7 +189,8 @@ angular.module('campforfreeApp')
       };
 
       // $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
-      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer', 'ion-bonfire', 'ion-ios-trash', 'ion-ios-paw'];
+      //$scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer', 'ion-bonfire', 'ion-ios-trash', 'ion-ios-paw'];
+      $scope.Tags = ['fire.svg', 'fish.svg', 'trash.svg', 'swim.svg', 'toliet.svg', 'camper.svg', 'trees.svg', 'mountain.svg'];
       // $scope.Tags = [
       //   { 
       //     name: 'Badplats',

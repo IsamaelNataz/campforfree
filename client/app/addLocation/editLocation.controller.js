@@ -103,8 +103,9 @@ angular.module('campforfreeApp')
           });
       };
 
-      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
-
+      // $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
+      $scope.Tags = ['fire.svg', 'fish.svg', 'trash.svg', 'swim.svg', 'toliet.svg', 'camper.svg', 'trees.svg', 'mountain.svg'];
+      
       $scope.toggleSelection = function(tagName) {
       var id = $scope.tagselection.indexOf(tagName);
 

@@ -6,6 +6,22 @@
 	margin: 4px 0px 0px 8px;
 }
 
+#addButton{
+	margin-top: 10px;
+}
+
+.checkBox,
+.checkBox:focus,
+.checkBox:active{
+	padding: 0px 10px 0px 0px;
+	cursor: pointer;
+	outline: none;
+}
+
+.checkBox input{
+	cursor: pointer;
+}
+
 .mapAddloc{
 	position: absolute;
   	top: 50px;
@@ -19,13 +35,13 @@
 	#addLocWrapper{
       margin: 0;
       padding-top: 10px;
-      height: 210px;
+      height: 270px;
     }
 
     .mapAddloc{
       position: absolute;
-      top: 260px;
-      height: calc(100vh - 310px);
+      top: 320px;
+      height: calc(100vh - 370px);
     }
 
 }
