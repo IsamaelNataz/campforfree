@@ -3,7 +3,7 @@
 #addLocWrapper{
 	z-index: 10000;
 	background: #f8f8f8;
-	margin: 8px 0px 0px 8px;
+	margin: 0px 0px 0px 14px;
 }
 
 #addButton{
@@ -50,7 +50,7 @@
 #editLocWrapper{
 	z-index: 10000;
 	background: #f8f8f8;
-	margin: 8px 0px 0px 8px;
+	margin: 0px 0px 0px 14px;
 }
 
 .editAddloc{

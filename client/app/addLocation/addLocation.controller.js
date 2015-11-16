@@ -74,6 +74,7 @@ angular.module('campforfreeApp')
           center: LatLng,
           panControl: false,
           scaleControl: true,
+          mapTypeControl: false,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
