@@ -2,34 +2,37 @@
 
 
 <!-- The Map Container -->
-<div id="map" class="mapMylocation">
-</div>
-<div id="mina-platser-input" class="col-xs-12" ng-repeat="location in locations | orderBy: 'date':true">
-		<div class="header">
-			<p class="h4">Namn: </p>
+<div class="col-xs-12 rowLocation header">
+	<div class="column">
+		<p class="h4">Namn: </p>
+	</div>
+	<div class="column">
+		<p class="h4">Tillagd: </p>
+	</div>
+	<div class="column">
+		<p class="h4">Taggar: </p>
+	</div>
+</div> 
+<div class="col-xs-12 rowLocation" ng-repeat="location in locations | orderBy: 'date':true">
+		<div class="column">
 			<div class="item">{{ location.name }}</div>
 		</div>
 
-		<div class="header">
-			<p class="h4">Tillagd: </p>
-			<div class="item">{{ location.date | date:'medium'}}</div>
+		<div class="column">
+			<div class="item">{{ location.date | date : format : timezone}}</div>
 		</div>
 
-		<div class="header">
-			<p class="h4">Taggar: </p>
+		<div class="column">
 			<div class="item" ng-repeat="tag in location.tags">
-				<span class="{{tag}}"></span>
+				<span class="{{tag}}" class="tag"></span>
 			</div>
 		</div>
 
-		<div class="header">
-			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info">Redigera</button></a>
+		<div class="column">
+			<a href="/redigeraplats/{{location._id}}"><button class="btn btn-info" id="edit">Redigera</button></a>
 		</div>
-		<div class="header">
-			<button type="button" class="close" ng-click="deleteLocation(location)">&times;</button>
+		<div class="column">
+			<span class="glyphicon glyphicon-remove" id="remove" ng-click="deleteLocation(location)"></span>
 		</div>
 	<p class="help-block"> {{ message }} </p>
 </div>
-<footer class="footer">
-      <p>Papa Emeritus H and Mastah G developing cool ztuff</p>
-</footer>

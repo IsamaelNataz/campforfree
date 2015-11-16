@@ -3,21 +3,72 @@
 angular.module('campforfreeApp')
   .controller('AddLocationCtrl', function ($scope, $http, $location, socket, Auth, multipartForm, $filter) {
 
-    navigator.geolocation.getCurrentPosition(function(position) {
       //Get the name from the user that's logged-in
       var user = Auth.getCurrentUser().name;
 
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
+      var pos = {};
+      var geo = true;
+      var zoomOut;
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
+      } else { 
+        alert("Geolocation is not supported by this browser.");
+      }
+
+      function showPosition(position) {
+          pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          zoomOut = 13;
+          initialize(pos, zoomOut); 
+
+          $scope.myLocation = function(){
+            initialize(pos, zoomOut);
+            if (!geo) {
+              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
+            };
+          };
+      }
+
+      $scope.myLocation = function(){
+        if (!geo) {
+              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
+            };
       };
 
-      function initialize(pos) {
+      function showError(error) {
+          switch(error.code) {
+              case error.PERMISSION_DENIED:
+                  alert("Tillåt att visa din platsinfo för att se vart du befinner dig");
+                  geo = false;
+                  pos = {
+                        lat: 62.8376996,
+                        lng: 15.9853149
+                      };
+                  zoomOut = 5;
+                  initialize(pos, zoomOut);
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  alert("Location information is unavailable.");
+                  break;
+              case error.TIMEOUT:
+                  alert("The request to get user location timed out.");
+                  break;
+              case error.UNKNOWN_ERROR:
+                  alert("An unknown error occurred.");
+                  break;
+          }
+      }
+
+      function initialize(pos, zoomOut) {
         var latitude = pos.lat;
         var longitude = pos.lng;
-        var zoom = 13;
+        var zoom = zoomOut;
         var newmarker;
         var markers;
+        var style2 = [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}];
 
         var LatLng = new google.maps.LatLng(latitude, longitude);
         var mapOptions = {
@@ -29,6 +80,7 @@ angular.module('campforfreeApp')
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+        map.setOptions({styles: style2});
 
         var setMarker = function(){
             if(newmarker){
@@ -139,7 +191,7 @@ angular.module('campforfreeApp')
       };
 
       // $scope.Tags = ['Badplats', 'Eldplats', 'Hav'];
-      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer'];
+      $scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer', 'ion-bonfire', 'ion-ios-trash', 'ion-ios-paw'];
       // $scope.Tags = [
       //   { 
       //     name: 'Badplats',
@@ -181,7 +233,4 @@ angular.module('campforfreeApp')
 
       } // END of initialize :::
 
-      initialize(pos);
-
-    });
 });

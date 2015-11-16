@@ -20,7 +20,7 @@ angular.module('campforfreeApp')
     function initialize(pos) {
         var latitude = pos.lat;
         var longitude = pos.lng;
-        var zoom = 7;
+        var zoom = 15;
         var marker;
 
         var LatLng = new google.maps.LatLng(latitude, longitude);

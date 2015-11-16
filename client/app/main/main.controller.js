@@ -4,21 +4,66 @@ angular.module('campforfreeApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     // The infoBox
     $('#infoBox').hide();
+      var pos = {};
+      var geo = true;
+      var zoomOut;
 
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
+      } else { 
+        alert("Geolocation is not supported by this browser.");
+      }
+
+      function showPosition(position) {
+          pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          zoomOut = 8;
+          initialize(pos, zoomOut); 
+
+          $scope.myLocation = function(){
+            console.log(geo);
+            if (!geo) {
+              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
+            };
+            initialize(pos, zoomOut);
           };
-        $scope.myLocation = function(){
-          initialize(pos);
-        };
+      }
 
-      function initialize(pos) {
+      $scope.myLocation = function(){
+        if (!geo) {
+              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
+            };
+      };
+
+      function showError(error) {
+          switch(error.code) {
+              case error.PERMISSION_DENIED:
+                  alert("Tillåt att visa din platsinfo för att se vart du befinner dig");
+                  geo = false;
+                  pos = {
+                        lat: 62.8376996,
+                        lng: 15.9853149
+                      };
+                  zoomOut = 5;
+                  initialize(pos, zoomOut);
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  alert("Location information is unavailable.");
+                  break;
+              case error.TIMEOUT:
+                  alert("The request to get user location timed out.");
+                  break;
+              case error.UNKNOWN_ERROR:
+                  alert("An unknown error occurred.");
+                  break;
+          }
+      }
+
+      function initialize(pos, zoomOut) {
         var marker;
-        var infowindow;
-        var content;
-        var zoom = 8;
+        var zoom = zoomOut;
         var latitude = pos.lat;
         var longitude = pos.lng;
         var LatLng = new google.maps.LatLng(latitude, longitude);
@@ -50,7 +95,8 @@ angular.module('campforfreeApp')
               title: $scope.locations[i].name,
               info: $scope.locations[i].info,
               tags: $scope.locations[i].tags,
-              icon: '../../assets/images/Untitled-1-01.svg'
+              // icon: '../../assets/images/Untitled-1-01.svg'
+              icon: '../../assets/images/camping2-01.svg'
             });
 
             google.maps.event.addListener(marker, 'click', function(){
@@ -75,7 +121,5 @@ angular.module('campforfreeApp')
         });
 
        } // END of initialize :::
-       initialize(pos);
 
-      });
   });

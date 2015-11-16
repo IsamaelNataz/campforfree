@@ -10,7 +10,7 @@
 	position: absolute;
   	top: 50px;
   	left: 0;
-  	height:calc(100% - 140px);
+  	height:calc(100% - 50px);
   	width: 100%;
  }
 
@@ -42,7 +42,7 @@
 	position: absolute;
   	top: 50px;
   	left: 0;
-  	height:calc(100% - 140px);
+  	height:calc(100% - 50px);
   	width: 100%;
  }
 
@@ -63,7 +63,7 @@
 }
 
 /*** MINA PLATSER ***/
-#mina-platser-input{
+.rowLocation{
 	background: rgba(25, 51, 0, 0.7);
 	margin: 0;
 	color: white;
@@ -72,17 +72,39 @@
 	border-bottom: 1px solid #999;
 }
 
+.header{
+	background: none;
+	color: rgba(25, 51, 0, 1);
+}
+
 .mapMylocation{
 	position: absolute;
   	top: 50px;
   	left: 0;
-  	height:calc(100% - 140px);
+  	height:calc(100% - 50px);
   	width: 100%;
 }
 
-.header{
-	text-align: center;
-	width: 20%;
+.tag{
+	font-size: 25px;
+}
+.glyphicon-tree-conifer{
+	font-size: 15px;
+}
+
+#remove{
+  cursor: pointer;
+  font-size: 26px;
+  /*padding-top: 10px;*/
+}
+
+#edit{
+  /*margin-top: 5px;*/
+}
+
+.column{
+	/*text-align: center;*/
+	width: 15%;
 	padding: 10px;
 }
 .item{
