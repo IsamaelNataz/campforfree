@@ -32,6 +32,10 @@
 
  @media screen and (max-width: 767px) {
 
+ 	#addButton{
+		margin-top: 5px;
+	}
+
 	#addLocWrapper{
       margin: 0;
       padding-top: 10px;
@@ -53,7 +57,7 @@
 	margin: 0px 0px 0px 14px;
 }
 
-.editAddloc{
+.editLoc{
 	position: absolute;
   	top: 70px;
   	left: 0;
@@ -66,13 +70,13 @@
 	#editLocWrapper{
       margin: 0;
       padding-top: 10px;
-      height: 260px;
+      height: 320px;
     }
 
-    .editAddloc{
+    .editLoc{
       position: absolute;
-      top: 310px;
-      height: calc(100vh - 360px);
+      top: 370px;
+      height: calc(100vh - 420px);
     }
 
 }

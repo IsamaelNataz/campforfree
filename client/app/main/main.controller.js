@@ -9,7 +9,7 @@ angular.module('campforfreeApp')
       var zoomOut;
 
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true, maximumAge: 0 });
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else { 
         alert("Geolocation is not supported by this browser.");
       }

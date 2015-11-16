@@ -42,14 +42,13 @@ angular.module('campforfreeApp')
               $scope.latitude = pos.lat();
               $scope.longitude = pos.lng();
               marker.setPosition(pos);
-              map.setCenter(pos);
+              // map.setCenter(pos);
             } else {
               $scope.latitude = pos.lat;
               $scope.longitude = pos.lng;
               marker = new google.maps.Marker({
               position: pos,
               map: map,
-              title: 'Du är här!',
               draggable: true,
               animation: 'DROP',
               options: {

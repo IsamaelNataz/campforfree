@@ -11,7 +11,7 @@ angular.module('campforfreeApp')
       var zoomOut;
 
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true, maximumAge: 0 });
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else { 
         alert("Geolocation is not supported by this browser.");
       }
@@ -58,7 +58,7 @@ angular.module('campforfreeApp')
                   break;
           }
       }
-
+    
       function initialize(pos, zoomOut) {
         var latitude = pos.lat;
         var longitude = pos.lng;
@@ -85,7 +85,7 @@ angular.module('campforfreeApp')
               $scope.latitude = pos.lat();
               $scope.longitude = pos.lng();
               newmarker.setPosition(pos);
-              map.setCenter(pos);
+              // map.setCenter(pos);
             } else {
               $scope.latitude = pos.lat;
               $scope.longitude = pos.lng;
@@ -126,7 +126,6 @@ angular.module('campforfreeApp')
         // Marker CLICK event :::
         google.maps.event.addListener(map, 'click', function(e){
           pos = e.latLng;
-          console.log(pos.lat());
           setMarker();
         });
         // Marker DRAG event :::
