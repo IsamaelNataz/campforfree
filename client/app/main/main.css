@@ -98,7 +98,7 @@ body{
       padding: 0;
     }
     #infoBoxCont{
-      padding: 50px;
+      padding: 100px 50px 50px 50px;
       width: 100%;
       height: 100%;
     }
@@ -119,6 +119,10 @@ body{
 
 #navbar-main ul li a {
     color: #95B981;
+}
+
+.glyphicon-remove{
+  font-size: 20px;
 }
 
 *:focus, button, .btn:focus, button:active, button:focus, textarea:focus{

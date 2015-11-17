@@ -6,12 +6,12 @@
        <h1>{{ name }}</h1>
 
        <p ng-bind-html="info | nl2br">{{ info }}</p>
-       <span ng-repeat="tag in tags"><img src='../../assets/images/tags/{{tag}}'></span>
+       <span ng-repeat="tag in tags"><img class="tags" src='../../assets/images/tags/{{tag}}'></span>
      </div>
   </div>
 </div>
   <div id="map" class="mainMap">
   </div>
   <div id="myLocationPin">
-    <span class="ion-android-locate" ng-click="myLocation()"></span>
+    <span class="glyphicon glyphicon-record" ng-click="myLocation()"></span>
   </div>
