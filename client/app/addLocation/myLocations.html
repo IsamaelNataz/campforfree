@@ -18,10 +18,11 @@
 					<div class="col-md-3 col-xs-5">{{ location.name }}</div>
 				
 					<div class="col-md-3 col-xs-4">{{ location.date | date : format : timezone}}</div>
-				
-					<a href="/redigeraplats/{{location._id}}" class="col-md-3 col-xs-1"><span class="glyphicon glyphicon-cog" id="cog"></span><button class="btn btn-info" id="editButton">Redigera</button></a>
-				
-					<span class="glyphicon glyphicon-remove col-md-3 col-xs-1" id="remove" ng-click="deleteLocation(location)"></span>
+					
+					<div class="col-md-6" id="settings">
+						<a href="/redigeraplats/{{location._id}}"> <span class="glyphicon glyphicon-cog" id="cog"></span></a>
+						<span class="glyphicon glyphicon-remove" id="remove" ng-click="deleteLocation(location)"></span>
+					</div>
 				</div>
 				<div class="row tags">
 					<div class="col-md-1 col-xs-1" ng-repeat="tag in location.tags">

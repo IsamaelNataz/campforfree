@@ -6,7 +6,7 @@
 <!-- The Map Form -->
 
 <div class="col-md-4" id="addLocWrapper">
-	<h1>Lägg till ny plats</h1>
+	<h1 class="header">Lägg till ny plats</h1>
 	<form name="form" ng-submit="addLoc(form)" novalidate>
 		<div class="form-group">
 		  <input type="text" class="form-control" ng-model="Name" name="name" placeholder="Namn" required>
@@ -17,14 +17,8 @@
 		  <button type="submit" class="btn btn-warning form-control" id="addButton" name="button">Spara</button>
 		</div>
 	</form>
-	<p class="help-block" ng-show="form.name.$error.required && form.info.$error.required && submitted">
-         Var vänlig och fyll i både namn och info.
-    </p>
-    <p class="help-block" ng-show="form.name.$error.required && submitted">
-         Var vänlig och fyll i namn.
-    </p>
-    <p class="help-block" ng-show="form.info.$error.required && submitted">
-         Var vänlig och fyll i info.
+    <p class="help-block" ng-show="form.name.$error.required && submitted || form.info.$error.required && submitted">
+         Var vänlig och fyll i namn samt info.
     </p>
 	<p class="help-block"> {{ message }} </p>
 </div>
