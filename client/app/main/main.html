@@ -4,9 +4,10 @@
     <span id="close-infoBox" class="text-right"><span class="glyphicon glyphicon-remove"></span></span>
     <!-- <div class="container"> -->
        <h1>{{ name }}</h1>
-       <p>{{ info }}</p>
-       <span ng-repeat="tag in tags"><img class="tags" src='../../assets/images/tags/{{tag}}'></span>
-     <!-- </div> -->
+
+       <p ng-bind-html="info | nl2br">{{ info }}</p>
+       <span ng-repeat="tag in tags"><img src='../../assets/images/tags/{{tag}}'></span>
+     </div>
   </div>
 </div>
   <div id="map" class="mainMap">
