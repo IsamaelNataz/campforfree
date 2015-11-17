@@ -31,6 +31,8 @@ body{
 #close-infoBox{
   float: right;
   position: absolute;
+  margin-top: 15px;
+  margin-right: 15px;
   top: 10px;
   right: 10px;
 }
@@ -43,33 +45,37 @@ body{
   top: 50px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 50px);
   background: rgba(25, 51, 0, 0.5);
   color: white;
   text-align: center;
   padding: 50px 25px;
-  display: -webkit-flex;
+  /*display: -webkit-flex;*/
   display: flex;
-  -webkit-align-items: center;
+  /*-webkit-align-items: center;*/
   align-items: center;
-  -webkit-justify-content: center;
+  /*-webkit-justify-content: center;*/
   justify-content: center;
-  z-index: 999;
+  z-index: 500;
 }
-/*#infoBoxCont{
+#infoBoxCont{
   height: 50vh;
   width: 50vw;
   position: relative;
   background: rgba(25, 51, 0, 0.5);
-  background: pink;
   padding: 25px;
-  border-radius: 10px;
-  border: solid 1px #fff;
+  /*border-radius: px;*/
+  /*border: 1px solid #fff;*/
   z-index: 1000;
-}*/
+}
   @media (max-width: 768px){
+    #infoBox{
+      padding: 0;
+    }
     #infoBoxCont{
-      width: 100vw;
+      padding: 50px;
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -117,6 +123,11 @@ body{
 }
 
 /* Navbar */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus{
+  background: rgba(25, 71, 1, 0.3);;
+}
 #navbarmobile{
       margin-bottom: 0px;
 }

@@ -12,7 +12,7 @@ angular.module('campforfreeApp')
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else { 
+      } else {
         alert("Geolocation is not supported by this browser.");
       }
 
@@ -22,7 +22,7 @@ angular.module('campforfreeApp')
               lng: position.coords.longitude
             };
           zoomOut = 13;
-          initialize(pos, zoomOut); 
+          initialize(pos, zoomOut);
 
           $scope.myLocation = function(){
             initialize(pos, zoomOut);
@@ -58,7 +58,7 @@ angular.module('campforfreeApp')
                   break;
           }
       }
-    
+
       function initialize(pos, zoomOut) {
         var latitude = pos.lat;
         var longitude = pos.lng;
@@ -135,6 +135,10 @@ angular.module('campforfreeApp')
         });
 
       $scope.loc = {};
+      // Add a nl2br function
+      String.prototype.nl2br = function(){
+        return this.replace(/\n/g, "<br />");
+      }
 
       $scope.addLoc = function(form) {
         $scope.submitted = true;
@@ -157,10 +161,10 @@ angular.module('campforfreeApp')
             };
 
            if (form.$valid) {
-            if (validation) {      
+            if (validation) {
                $http.post('/api/addLocations', {
                 name: $scope.Name,
-                info: $scope.Info,
+                info: $scope.Info.nl2br(),
                 latitude: $scope.latitude,
                 longitude: $scope.longitude,
                 userid: user,
@@ -192,7 +196,7 @@ angular.module('campforfreeApp')
       //$scope.Tags = ['glyphicon glyphicon-tint', 'glyphicon glyphicon-fire', 'glyphicon glyphicon-tree-conifer', 'ion-bonfire', 'ion-ios-trash', 'ion-ios-paw'];
       $scope.Tags = ['fire.svg', 'fish.svg', 'trash.svg', 'swim.svg', 'toliet.svg', 'camper.svg', 'trees.svg', 'mountain.svg'];
       // $scope.Tags = [
-      //   { 
+      //   {
       //     name: 'Badplats',
       //     icon: 'glyphicon glyphicon-tint'
       //   },
@@ -210,8 +214,8 @@ angular.module('campforfreeApp')
 
       // $scope.selectedTags = function () {
       //   $scope.tagselection = $filter('filter')($scope.Tags, {checked: true});
-      // }; 
-      
+      // };
+
       $scope.tagselection = [];
 
       $scope.toggleSelection = function(tagName) {
