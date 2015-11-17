@@ -17,10 +17,8 @@
 		  <button type="submit" class="btn btn-warning form-control" id="addButton" name="button">Spara</button>
 		</div>
 	</form>
-    <p class="help-block" ng-show="form.name.$error.required && submitted || form.info.$error.required && submitted">
-         Var vänlig och fyll i namn samt info.
-    </p>
-	<p class="help-block"> {{ message }} </p>
+    <p class="help-block" ng-show="form.name.$error.required && submitted || form.info.$error.required && submitted">Var vänlig och fyll i namn samt info.</p>
+	<p class="help-block">{{ message }}</p>
 </div>
 <div id="map" class="mapAddloc">
 </div>

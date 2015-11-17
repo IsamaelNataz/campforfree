@@ -144,6 +144,20 @@ body{
   margin-bottom: 10px;
 }
 
+.has-error .help-block,
+.help-block,
+.list-group,
+.text-muted,
+.list-group-item a{
+  color: #fff;
+}
+
+.list-group-item{
+  background: rgba(25, 51, 0, 0.8);
+  margin-bottom: 2px; 
+  border: none;
+}
+
 /* Navbar */
 #navbarmobile{
       margin-bottom: 0px;
@@ -200,7 +214,7 @@ body{
       font-size: 20px;
       margin-top: 2px;
     }
-
+/**/
     .mainMap{
       top: 50px;
       height:calc(100% - 100px);
@@ -209,5 +223,6 @@ body{
 
     #wrapper{
       margin-top: 10px;
+      margin-bottom: 50px;
     }
 }
