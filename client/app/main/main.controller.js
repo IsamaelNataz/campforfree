@@ -10,7 +10,7 @@ angular.module('campforfreeApp')
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else { 
+      } else {
         alert("Geolocation is not supported by this browser.");
       }
 
@@ -20,7 +20,7 @@ angular.module('campforfreeApp')
               lng: position.coords.longitude
             };
           zoomOut = 8;
-          initialize(pos, zoomOut); 
+          initialize(pos, zoomOut);
 
           $scope.myLocation = function(){
             console.log(geo);

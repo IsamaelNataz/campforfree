@@ -116,8 +116,8 @@ body{
 	font-size: 15px;
 }
 
-.tags{
-	padding: 5px 0px 5px 0px;
+.tags-location{
+	padding: 5px 0px;
 	text-align: center;
 }
 
@@ -145,7 +145,7 @@ body{
 	font-size: 16px;
 	color: #fff;
 	padding-right: 5px;
-}	
+}
 
 @media (max-width: 767px){
 
