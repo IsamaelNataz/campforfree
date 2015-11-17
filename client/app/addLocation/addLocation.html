@@ -12,7 +12,7 @@
 		  <input type="text" class="form-control" ng-model="Name" name="name" placeholder="Namn" required>
 		  <textarea type="text" class="form-control" ng-model="Info" name="info" value="" placeholder="Info" required></textarea>
 					<label ng-repeat="tagName in Tags" class="checkBox">
-		  			<input type="checkbox" name="selectedTags[]" class="tags" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"> <img src="../../assets/images/tags/{{tagName}}" alt="HAJ" width="30">
+		  			<input type="checkbox" name="selectedTags[]" value="{{tagName}}" ng-checked="selection.indexOf(tagName) > -1" ng-click="toggleSelection(tagName)"> <img src="../../assets/images/tags/{{tagName}}" width="35">
 					</label>
 		  <button type="submit" class="btn btn-warning form-control" id="addButton" name="button">Spara</button>
 		</div>
@@ -23,4 +23,7 @@
 	<p class="help-block"> {{ message }} </p>
 </div>
 <div id="map" class="mapAddloc">
+</div>
+<div id="myLocationPin">
+    <span class="glyphicon glyphicon-record" ng-click="myLocation()"></span>
 </div>

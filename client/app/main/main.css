@@ -28,6 +28,10 @@ body{
   opacity: 0.9;
 }
 
+.navbar-default{
+  border-color:#193201; 
+}
+
 .navbar-default .navbar-nav li a,
 .navbar-default .navbar-nav li span{
   color: #193201;
@@ -186,7 +190,7 @@ body{
       position: absolute;
       z-index: 110000;
       left: 18px;
-      bottom: 8px;
+      bottom: 4px;
       font-size: 25px;
       cursor: pointer;
       color: #888;

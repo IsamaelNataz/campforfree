@@ -4,10 +4,11 @@ angular.module('campforfreeApp')
   .controller('EditLocationCtrl', function ($scope, $http, $location, $routeParams, socket) {
 
     var id = $routeParams.id;
+    var pos = {};
     $http.get('/api/addLocations/'+id).success(function(locations) {
       $scope.locations = locations;
       socket.syncUpdates('addLocation', $scope.locations);
-      var pos = {
+      pos = {
         lat: parseFloat($scope.locations.latitude),
         lng: parseFloat($scope.locations.longitude)
       };
@@ -16,6 +17,48 @@ angular.module('campforfreeApp')
       $scope.tagselection = $scope.locations.tags;
       initialize(pos);
     });
+
+      var geo = true;
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+
+      function showPosition(position) {
+          pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+          $scope.myLocation = function(){
+            initialize(pos);
+            if (!geo) {
+              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
+            };
+          };
+      }
+
+      function showError(error) {
+          switch(error.code) {
+              case error.PERMISSION_DENIED:
+                  alert("Tillåt att visa din platsinfo för att se vart du befinner dig");
+                  geo = false;
+                  pos = {
+                        lat: 62.8376996,
+                        lng: 15.9853149
+                      };
+                  initialize(pos);
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  alert("Location information is unavailable.");
+                  break;
+              case error.UNKNOWN_ERROR:
+                  alert("An unknown error occurred.");
+                  break;
+          }
+      }
 
     function initialize(pos) {
         var latitude = pos.lat;
@@ -54,7 +97,7 @@ angular.module('campforfreeApp')
               options: {
                 animation: google.maps.Animation.BOUNCE
               },
-              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+              icon: '../../assets/images/markeradd.svg'
             });
           }
         };

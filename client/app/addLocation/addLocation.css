@@ -43,13 +43,13 @@
 	#addLocWrapper{
       margin: 0;
       padding-top: 10px;
-      height: 270px;
+      height: 280px;
     }
 
     .mapAddloc{
       position: absolute;
-      top: 320px;
-      height: calc(100vh - 370px);
+      top: 330px;
+      height: calc(100vh - 380px);
     }
 }
 
@@ -151,6 +151,11 @@ body{
 	font-size: 16px;
 	color: #fff;
 	padding-right: 5px;
+}
+
+.noloc{
+	color: #fff;
+	padding-left: 10px;
 }
 
 @media (max-width: 767px){

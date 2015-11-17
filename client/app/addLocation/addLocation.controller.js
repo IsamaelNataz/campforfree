@@ -32,12 +32,6 @@ angular.module('campforfreeApp')
           };
       }
 
-      $scope.myLocation = function(){
-        if (!geo) {
-              alert('Tillåt att visa din platsinfo för att se vart du befinner dig');
-            };
-      };
-
       function showError(error) {
           switch(error.code) {
               case error.PERMISSION_DENIED:
@@ -97,7 +91,7 @@ angular.module('campforfreeApp')
               options: {
                 animation: google.maps.Animation.BOUNCE
               },
-              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+              icon: '../../assets/images/markeradd.svg'
             });
           }
         };
