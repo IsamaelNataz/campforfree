@@ -4,28 +4,28 @@
 <!-- The Map Container -->
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
-			<div class="row">
-				<div class="col-md-3 col-xs-6">
+			<div class="row" id="header">
+				<div class="col-md-3 col-xs-5">
 					<p class="h4">Namn: </p>
 				</div>
-				<div class="col-md-3 col-xs-6">
+				<div class="col-md-3 col-xs-3">
 					<p class="h4">Tillagd: </p>
 				</div>
 			</div>
 	
 			<div class="result" ng-repeat="location in locations | orderBy: 'date':true">	
 				<div class="row head">
-					<div class="col-md-3 col-xs-6">{{ location.name }}</div>
+					<div class="col-md-3 col-xs-5">{{ location.name }}</div>
 				
-					<div class="col-md-3 col-xs-6">{{ location.date | date : format : timezone}}</div>
+					<div class="col-md-3 col-xs-4">{{ location.date | date : format : timezone}}</div>
 				
-					<a href="/redigeraplats/{{location._id}}" class="col-md-3 col-xs-6"><button class="btn btn-info" id="edit">Redigera</button></a>
+					<a href="/redigeraplats/{{location._id}}" class="col-md-3 col-xs-1"><span class="glyphicon glyphicon-cog" id="cog"></span><button class="btn btn-info" id="editButton">Redigera</button></a>
 				
-					<span class="glyphicon glyphicon-remove col-md-3 col-xs-6" id="remove" ng-click="deleteLocation(location)"></span>
+					<span class="glyphicon glyphicon-remove col-md-3 col-xs-1" id="remove" ng-click="deleteLocation(location)"></span>
 				</div>
 				<div class="row tags">
 					<div class="col-md-1 col-xs-1" ng-repeat="tag in location.tags">
-						<img src="../../assets/images/tags/{{tag}}" width="50"></span>
+						<img src="../../assets/images/tags/{{tag}}" width="45"></span>
 					</div>
 				</div>
 			</div>
