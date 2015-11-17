@@ -116,7 +116,7 @@ angular.module('campforfreeApp')
                 position: latlng,
                 map: map,
                 title: locations[i].name,
-                icon: '../../assets/images/camping2-01.svg'
+                icon: '../../assets/images/marker.svg'
               });
             }
           });
@@ -181,7 +181,7 @@ angular.module('campforfreeApp')
                  // };
                  loadMarkers();
                  //multipartForm.post(uploadUrl, $scope.locfile);
-                 $scope.message = "Platsen tillagd";
+                 // $scope.message = "Platsen tillagd";
                  $scope.tagselection = [];
                  $location.path("/minaplatser");
                 });

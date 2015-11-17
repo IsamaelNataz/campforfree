@@ -2,12 +2,16 @@
 
 #addLocWrapper{
 	z-index: 10000;
-	background: #f8f8f8;
+	background: rgba(25, 50, 1, 0.8);
 	margin: 0px 0px 0px 14px;
 }
 
 #addButton{
 	margin-top: 10px;
+}
+
+.header{
+	color:#fff;
 }
 
 .checkBox,
@@ -53,8 +57,12 @@
 
 #editLocWrapper{
 	z-index: 10000;
-	background: #f8f8f8;
+	background: rgba(25, 50, 1, 0.8);
 	margin: 0px 0px 0px 14px;
+}
+
+label{
+	color: #fff;
 }
 
 .editLoc{
@@ -108,30 +116,36 @@ body{
 	font-size: 15px;
 }
 
-.tags{
-	padding: 5px 0px 5px 0px;
+.tags-location{
+	padding: 5px 0px;
 	text-align: center;
 }
 
 .result{
 	margin: 10px 0px;
-	background: rgba(255, 255, 255, 0.5);
+	background: rgba(25, 50, 1, 0.6);
 	padding: 10px;
+}
+
+.result:hover{
+	background: rgba(25, 50, 1, 0.9);
+}
+
+#settings{
+	text-align: right;
 }
 
 #remove{
   cursor: pointer;
-  font-size: 26px;
+  font-size: 16px;
   padding-bottom: 0px;
 }
 
-#editButton{
-		padding: 3px 5px;
-	}
-
 #cog{
-	display: none;
-}	
+	font-size: 16px;
+	color: #fff;
+	padding-right: 5px;
+}
 
 @media (max-width: 767px){
 
@@ -146,12 +160,8 @@ body{
 
 	.result{
 		margin: 10px 0px;
-		background: rgba(255, 255, 255, 0.5);
+		background: rgba(25, 50, 1, 0.7);
 		padding: 10px;
-	}
-
-	#editButton{
-		display: none;
 	}
 
 	a:hover{
@@ -160,7 +170,6 @@ body{
 
 	#cog{
 		color: #fff;
-		display: inherit;
 		padding: 0px;
 	}
 
