@@ -96,6 +96,10 @@ body{
 	color: #fff;
 }
 
+#header{
+	padding-left: 10px;
+}
+
 .head{
 	padding-bottom: 5px;
 }
@@ -121,15 +125,48 @@ body{
   padding-bottom: 0px;
 }
 
-/*#edit{
-  margin-top: 5px;
-}*/
+#editButton{
+		padding: 3px 5px;
+	}
 
-@media (max-width: 1024px){
-	.headWrapper{
-		display: inline-block;
-		width: 100px;
-		height: 100%;
+#cog{
+	display: none;
+}	
+
+@media (max-width: 767px){
+
+	body{
+		background: url('../../assets/images/wallhaven-286005.jpg') no-repeat fixed;
+		-webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+		width: 100%;
+	}
+
+	.result{
+		margin: 10px 0px;
+		background: rgba(255, 255, 255, 0.5);
+		padding: 10px;
+	}
+
+	#editButton{
+		display: none;
+	}
+
+	a:hover{
+		text-decoration: none;
+	}
+
+	#cog{
+		color: #fff;
+		display: inherit;
+		padding: 0px;
+	}
+
+	#remove{
+	  font-size: 16px;
+	  padding-top: 2px;
 	}
 
 	.tags img{
@@ -137,13 +174,9 @@ body{
     	padding: 0px 2px;
     }
 
-    .row{
-    	text-align: center;
-    }
-
     .row a,
     .row span{
-    	padding: 5px 0px;
+    	padding: 2px 0px;
     }
 
 }
