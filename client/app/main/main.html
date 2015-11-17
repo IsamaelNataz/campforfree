@@ -3,7 +3,7 @@
     <h1 id="close-infoBox" class="text-right">X</h1>
     <div class="container">
        <h1>{{ name }}</h1>
-       <p>{{ info }}</p>
+       <p ng-bind-html="info | nl2br">{{ info }}</p>
        <span ng-repeat="tag in tags"><img src='../../assets/images/tags/{{tag}}'></span>
      </div>
   </div>
