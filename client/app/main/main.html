@@ -1,12 +1,14 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-  <div id="infoBox" class="">
+<div id="infoBox" class="">
+  <div class="infoBoxCont">
     <h1 id="close-infoBox" class="text-right">X</h1>
-    <div class="container">
+    <!-- <div class="container"> -->
        <h1>{{ name }}</h1>
        <p>{{ info }}</p>
        <span ng-repeat="tag in tags"><img src='../../assets/images/tags/{{tag}}'></span>
-     </div>
+     <!-- </div> -->
   </div>
+</div>
   <div id="map" class="mainMap">
   </div>
   <div id="myLocationPin">
